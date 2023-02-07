@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 import { PasswordAndConfirmPasswordValidation } from "../PasswordAndConfirmPasswordValidation/PasswordAndConfirmPasswordValidation";
 import { EmailInput } from "../EmailInput/EmailInput";
+import { UsernameInput } from "../UsernameInput/UsernameInput";
 
 export interface RegistrationFormData {
   email: string;
@@ -23,6 +24,10 @@ function RegistrationForm() {
     setFormData({ ...formData, email });
   }
 
+  function handleSetUsername(username: string) {
+    setFormData({ ...formData, username });
+  }
+
   return (
     <div>
       <form autoComplete="off">
@@ -30,6 +35,7 @@ function RegistrationForm() {
         <PasswordAndConfirmPasswordValidation
           handleSetPassword={handleSetPassword}
         />
+        <UsernameInput handleSetUsername={handleSetUsername} />
         <button type="submit">Submit</button>
       </form>
     </div>

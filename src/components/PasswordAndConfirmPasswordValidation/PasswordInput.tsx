@@ -15,6 +15,7 @@ function PasswordInput(props: PasswordInputProps) {
         type="password"
         name="password"
         autoComplete="off"
+        placeholder="Password"
         value={props.passwordValue}
         onChange={props.handleChange}
         onKeyUp={props.handleValidation}
