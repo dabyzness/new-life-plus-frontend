@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from "react";
+import React, { ChangeEvent, KeyboardEvent, useState, useEffect } from "react";
 import { PasswordInput } from "./PasswordInput";
 import { ConfirmPasswordInput } from "./ConfirmPasswordInput";
 
@@ -16,7 +16,13 @@ export interface PasswordError {
   isCorrect: boolean;
 }
 
-function PasswordAndConfirmPasswordValidation() {
+export interface PasswordAndConfirmPasswordValidationProps {
+  handleSetPassword: Function;
+}
+
+function PasswordAndConfirmPasswordValidation(
+  props: PasswordAndConfirmPasswordValidationProps
+) {
   const [passwordError, setPasswordError] = useState<PasswordError>({
     hasMinLength: false,
     hasUppercase: false,
@@ -32,14 +38,20 @@ function PasswordAndConfirmPasswordValidation() {
     confirmPassword: "",
   });
 
+  useEffect(() => {
+    if (passwordError.isCorrect && confirmPasswordMatch) {
+      props.handleSetPassword(passwordInput.password);
+    } else {
+      props.handleSetPassword("");
+    }
+  }, [passwordError.isCorrect, confirmPasswordMatch]);
+
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setPasswordInput({ ...passwordInput, [e.target?.name]: e.target?.value });
   }
 
   function handleValidation(e: KeyboardEvent<HTMLInputElement>) {
     const inputName = (e.target as HTMLInputElement)?.name;
-
-    console.log(inputName);
 
     if (inputName === "password") {
       const uppercaseRegExp: RegExp = /(?=.*?[A-Z])[A-Z]/;
@@ -64,7 +76,6 @@ function PasswordAndConfirmPasswordValidation() {
       inputName === "confirmPassword" ||
       (inputName === "password" && passwordInput.confirmPassword.length > 0)
     ) {
-      console.log(confirmPasswordMatch);
       setConfirmPasswordMatch(
         passwordInput.password === passwordInput.confirmPassword
       );
