@@ -1,11 +1,22 @@
 import React from "react";
 import "./App.css";
-import { RegistrationForm } from "./components/RegistrationForm/RegistrationForm";
+import {
+  RegistrationForm,
+  RegistrationFormData,
+} from "./components/RegistrationForm/RegistrationForm";
+
+import { register } from "./services/auth";
+
+async function handleSubmitRegistration(user: RegistrationFormData) {
+  const registrationData = await register(user);
+
+  return registrationData;
+}
 
 function App() {
   return (
     <div className="App">
-      <RegistrationForm />
+      <RegistrationForm handleSubmitRegistration={handleSubmitRegistration} />
     </div>
   );
 }
