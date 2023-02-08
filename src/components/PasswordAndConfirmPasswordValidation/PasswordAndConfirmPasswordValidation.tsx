@@ -7,13 +7,13 @@ export interface PasswordsInput {
   confirmPassword: string;
 }
 
-export interface PasswordError {
-  hasMinLength: boolean;
-  hasUppercase: boolean;
-  hasLowercase: boolean;
-  hasDigit: boolean;
-  hasSpecial: boolean;
-  isCorrect: boolean;
+export interface PasswordError<T extends string | boolean> {
+  hasMinLength: T;
+  hasUppercase: T;
+  hasLowercase: T;
+  hasDigit: T;
+  hasSpecial: T;
+  isCorrect: T;
 }
 
 export interface PasswordAndConfirmPasswordValidationProps {
@@ -23,7 +23,7 @@ export interface PasswordAndConfirmPasswordValidationProps {
 function PasswordAndConfirmPasswordValidation(
   props: PasswordAndConfirmPasswordValidationProps
 ) {
-  const [passwordError, setPasswordError] = useState<PasswordError>({
+  const [passwordError, setPasswordError] = useState<PasswordError<boolean>>({
     hasMinLength: false,
     hasUppercase: false,
     hasLowercase: false,

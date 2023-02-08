@@ -1,13 +1,25 @@
+import { link } from "fs";
 import React, { ChangeEventHandler, KeyboardEventHandler } from "react";
 import { PasswordError } from "./PasswordAndConfirmPasswordValidation";
 
 import styles from "./PasswordInput.module.css";
 
+const passwordErrorMsg: PasswordError<string> = {
+  hasMinLength: "Minimum 8 character length",
+  hasLowercase: "Contains 1 lowercase character",
+  hasUppercase: "Contains 1 uppercase character",
+  hasDigit: "Contains 1 digit",
+  hasSpecial: "Contains 1 special character",
+  isCorrect: "Meets all requirements",
+};
+
+// const passwordErrorArr: (keyof typeof PasswordError)[] = ['hasMinLength', 'poop']
+
 export interface PasswordInputProps {
   handleChange: ChangeEventHandler<HTMLInputElement>;
   handleValidation: KeyboardEventHandler<HTMLInputElement>;
   passwordValue: string;
-  passwordError: PasswordError;
+  passwordError: PasswordError<boolean>;
 }
 
 function PasswordInput(props: PasswordInputProps) {
@@ -26,47 +38,21 @@ function PasswordInput(props: PasswordInputProps) {
       />
 
       <ul className={styles.validationPromptContainer}>
-        <li
-          className={styles.validationPrompt}
-          style={{ color: props.passwordError.hasMinLength ? "green" : "red" }}
-        >
-          Minimum 8 character length
-        </li>
-
-        <li
-          className={styles.validationPrompt}
-          style={{ color: props.passwordError.hasLowercase ? "green" : "red" }}
-        >
-          Contains 1 lowercase character
-        </li>
-
-        <li
-          className={styles.validationPrompt}
-          style={{ color: props.passwordError.hasUppercase ? "green" : "red" }}
-        >
-          Contains 1 uppercase character
-        </li>
-
-        <li
-          className={styles.validationPrompt}
-          style={{ color: props.passwordError.hasDigit ? "green" : "red" }}
-        >
-          Contains 1 number
-        </li>
-
-        <li
-          className={styles.validationPrompt}
-          style={{ color: props.passwordError.hasSpecial ? "green" : "red" }}
-        >
-          Contains 1 special character
-        </li>
-
-        <li
-          className={styles.validationPrompt}
-          style={{ color: props.passwordError.isCorrect ? "green" : "red" }}
-        >
-          Meets all requirements
-        </li>
+        {/* 
+        Maps passwordError with passwordErrorMsg to return a list item
+        */}
+        {Object.entries(props.passwordError).map((prompt) => {
+          return (
+            <li
+              key={prompt[0]}
+              className={`${styles.prompt} ${
+                prompt[1] ? styles.validPrompt : styles.notValidPrompt
+              }`}
+            >
+              {passwordErrorMsg[prompt[0] as keyof typeof passwordErrorMsg]}
+            </li>
+          );
+        })}
       </ul>
     </>
   );
