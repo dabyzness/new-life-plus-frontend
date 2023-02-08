@@ -1,6 +1,8 @@
 import React, { ChangeEventHandler, KeyboardEventHandler } from "react";
 import { PasswordError } from "./PasswordAndConfirmPasswordValidation";
 
+import styles from "./PasswordInput.module.css";
+
 export interface PasswordInputProps {
   handleChange: ChangeEventHandler<HTMLInputElement>;
   handleValidation: KeyboardEventHandler<HTMLInputElement>;
@@ -12,6 +14,7 @@ function PasswordInput(props: PasswordInputProps) {
   return (
     <>
       <input
+        className={styles.passwordInput}
         type="password"
         name="password"
         autoComplete="off"
@@ -22,32 +25,49 @@ function PasswordInput(props: PasswordInputProps) {
         required
       />
 
-      <div>
-        <p
+      <ul className={styles.validationPromptContainer}>
+        <li
+          className={styles.validationPrompt}
           style={{ color: props.passwordError.hasMinLength ? "green" : "red" }}
         >
           Minimum 8 character length
-        </p>
-        <p
+        </li>
+
+        <li
+          className={styles.validationPrompt}
           style={{ color: props.passwordError.hasLowercase ? "green" : "red" }}
         >
           Contains 1 lowercase character
-        </p>
-        <p
+        </li>
+
+        <li
+          className={styles.validationPrompt}
           style={{ color: props.passwordError.hasUppercase ? "green" : "red" }}
         >
           Contains 1 uppercase character
-        </p>
-        <p style={{ color: props.passwordError.hasDigit ? "green" : "red" }}>
+        </li>
+
+        <li
+          className={styles.validationPrompt}
+          style={{ color: props.passwordError.hasDigit ? "green" : "red" }}
+        >
           Contains 1 number
-        </p>
-        <p style={{ color: props.passwordError.hasSpecial ? "green" : "red" }}>
+        </li>
+
+        <li
+          className={styles.validationPrompt}
+          style={{ color: props.passwordError.hasSpecial ? "green" : "red" }}
+        >
           Contains 1 special character
-        </p>
-        <p style={{ color: props.passwordError.isCorrect ? "green" : "red" }}>
+        </li>
+
+        <li
+          className={styles.validationPrompt}
+          style={{ color: props.passwordError.isCorrect ? "green" : "red" }}
+        >
           Meets all requirements
-        </p>
-      </div>
+        </li>
+      </ul>
     </>
   );
 }

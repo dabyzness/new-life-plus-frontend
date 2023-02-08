@@ -32,10 +32,12 @@ function RegistrationForm(props: RegistrationFormProps) {
     setFormData({ ...formData, username });
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     props.handleSubmitRegistration(formData);
+
+    // Insert Navigate here to get us off of the page
   }
 
   return (
