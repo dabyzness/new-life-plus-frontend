@@ -1,5 +1,7 @@
 import React, { ChangeEventHandler, KeyboardEventHandler } from "react";
 
+import styles from "./ConfirmPasswordInput.module.css";
+
 export interface ConfirmPasswordInputProps {
   passwordValue: string;
   confirmPasswordMatch: boolean;
@@ -11,6 +13,9 @@ function ConfirmPasswordInput(props: ConfirmPasswordInputProps) {
   return (
     <>
       <input
+        className={`${styles.confirmPasswordInput} ${
+          props.confirmPasswordMatch ? styles.validInput : styles.notValidInput
+        }`}
         type="password"
         name="confirmPassword"
         autoComplete="off"
@@ -21,9 +26,15 @@ function ConfirmPasswordInput(props: ConfirmPasswordInputProps) {
         required
       />
 
-      <p style={{ display: props.confirmPasswordMatch ? "none" : "block" }}>
+      {/* <span className={""}></span> */}
+
+      {/* <div
+        className={`${styles.confirmPasswordValidation} ${
+          props.confirmPasswordMatch ? styles.validInput : styles.notValidInput
+        }`}
+      >
         Password Does not match
-      </p>
+      </div> */}
     </>
   );
 }

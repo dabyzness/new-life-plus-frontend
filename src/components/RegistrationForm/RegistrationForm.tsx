@@ -3,6 +3,8 @@ import { PasswordAndConfirmPasswordValidation } from "../PasswordAndConfirmPassw
 import { EmailInput } from "../EmailInput/EmailInput";
 import { UsernameInput } from "../UsernameInput/UsernameInput";
 
+import styles from "./RegistrationForm.module.css";
+
 export interface RegistrationFormData {
   email: string;
   password: string;
@@ -41,8 +43,12 @@ function RegistrationForm(props: RegistrationFormProps) {
   }
 
   return (
-    <div>
-      <form autoComplete="off" onSubmit={handleSubmit}>
+    <div className={styles.formContainer}>
+      <form
+        className={styles.registrationForm}
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
         <EmailInput handleSetEmail={handleSetEmail} />
         <PasswordAndConfirmPasswordValidation
           handleSetPassword={handleSetPassword}

@@ -13,8 +13,6 @@ const passwordErrorMsg: PasswordError<string> = {
   isCorrect: "Meets all requirements",
 };
 
-// const passwordErrorArr: (keyof typeof PasswordError)[] = ['hasMinLength', 'poop']
-
 export interface PasswordInputProps {
   handleChange: ChangeEventHandler<HTMLInputElement>;
   handleValidation: KeyboardEventHandler<HTMLInputElement>;
