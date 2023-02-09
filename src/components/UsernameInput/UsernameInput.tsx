@@ -36,9 +36,15 @@ function UsernameInput(props: UsernameInputProps) {
         onKeyUp={handleValidation}
         required
       />
-      <p style={{ display: usernameError ? "block" : "none" }}>
+      <label
+        className={username ? "inputLabelVisible" : "inputLabelInvisible"}
+        htmlFor="username"
+      >
+        Username
+      </label>
+      {/* <p style={{ display: usernameError ? "block" : "none" }}>
         Invalid Username
-      </p>
+      </p> */}
     </>
   );
 }

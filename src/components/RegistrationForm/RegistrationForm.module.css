@@ -8,6 +8,9 @@
 .registrationForm {
   display: flex;
   flex-direction: column;
+  background-color: whitesmoke;
+  padding: 40px;
+  border-radius: 10px;
 }
 
 input {
@@ -21,4 +24,16 @@ input {
 input[type="password"] {
   letter-spacing: 1px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+label {
+  margin: 0;
+  height: 0;
+  top: 0;
+  left: 0;
+  transform: translateX(24px);
+}
+
+input:focus {
+  border: none;
 }

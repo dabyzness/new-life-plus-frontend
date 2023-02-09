@@ -34,6 +34,14 @@ function PasswordInput(props: PasswordInputProps) {
         onKeyUp={props.handleValidation}
         required
       />
+      <label
+        className={
+          props.passwordValue ? "inputLabelVisible" : "inputLabelInvisible"
+        }
+        htmlFor="password"
+      >
+        Password
+      </label>
 
       <ul className={styles.validationPromptContainer}>
         {/* 

@@ -36,7 +36,13 @@ function EmailInput(props: EmailInputProps) {
         onKeyUp={handleValidation}
         required
       />
-      <p style={{ display: emailError ? "block" : "none" }}>Email is invalid</p>
+      <label
+        htmlFor="email"
+        className={email ? "inputLabelVisible" : "inputLabelInvisible"}
+      >
+        E-mail
+      </label>
+      {/* <p style={{ display: emailError ? "block" : "none" }}>Email is invalid</p> */}
     </>
   );
 }

@@ -25,6 +25,14 @@ function ConfirmPasswordInput(props: ConfirmPasswordInputProps) {
         onKeyUp={props.handleValidation}
         required
       />
+      <label
+        className={
+          props.passwordValue ? "inputLabelVisible" : "inputLabelInvisible"
+        }
+        htmlFor="confirmPassword"
+      >
+        Re-Enter Password
+      </label>
 
       {/* <span className={""}></span> */}
 

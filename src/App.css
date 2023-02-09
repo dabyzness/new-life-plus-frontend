@@ -5,3 +5,23 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.inputLabelVisible {
+  opacity: 1;
+}
+
+input:focus + .inputLabelVisible {
+  font-weight: bold;
+}
+
+.inputLabelInvisible {
+  opacity: 0;
+  color: red;
+}
+input + label {
+  transform: translate(24px, -82px);
+}
+
+input:focus {
+  outline: 1px solid black;
+}
