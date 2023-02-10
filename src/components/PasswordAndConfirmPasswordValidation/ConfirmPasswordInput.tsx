@@ -26,7 +26,9 @@ function ConfirmPasswordInput(props: ConfirmPasswordInputProps) {
     <>
       <input
         className={`${styles.confirmPasswordInput} ${
-          props.confirmPasswordMatch ? styles.validInput : styles.notValidInput
+          !props.confirmPasswordMatch && props.wasFocused.confirmPassword
+            ? "input-error"
+            : ""
         }`}
         type="password"
         name="confirmPassword"

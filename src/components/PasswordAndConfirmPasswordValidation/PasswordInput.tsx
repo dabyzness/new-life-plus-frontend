@@ -37,7 +37,11 @@ function PasswordInput(props: PasswordInputProps) {
   return (
     <>
       <input
-        className={styles.passwordInput}
+        className={`${styles.passwordInput} ${
+          !props.passwordError.isCorrect && props.wasFocused.password
+            ? "input-error"
+            : ""
+        }`}
         type="password"
         name="password"
         autoComplete="off"

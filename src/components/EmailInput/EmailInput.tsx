@@ -40,6 +40,9 @@ function EmailInput(props: EmailInputProps) {
   return (
     <>
       <input
+        className={`${
+          emailError && props.wasFocused.email ? "input-error" : ""
+        }`}
         type="email"
         name="email"
         autoComplete="off"

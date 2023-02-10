@@ -38,7 +38,9 @@ function UsernameInput(props: UsernameInputProps) {
   return (
     <>
       <input
-        className={`${usernameError ? "inputError" : ""}`}
+        className={`${
+          usernameError && props.wasFocused.username ? "input-error" : ""
+        }`}
         type="text"
         autoComplete="off"
         name="username"

@@ -28,16 +28,17 @@ input + label {
 input:focus + label {
   transform: translate(28px, -82px);
   color: black;
-  font-weight: bold;
+  font-weight: 500;
 }
 
-input:focus + label:after {
+label:after {
   content: "*";
+  color: red;
 }
 
 input {
   outline: none;
-  outline-color: black;
+  /* outline-color: black; */
   border: 1px solid #d1d1d1;
   border-radius: 2px;
   padding: 4px 12px;
@@ -62,10 +63,6 @@ input:focus {
   transition: 0.1s ease-in-out;
 }
 
-.notEmpty:after {
-  content: "*";
-}
-
 .validator-icon {
   height: 18px;
   width: 18px;
@@ -81,4 +78,21 @@ input:focus {
 
 .invalid-icon {
   background-image: url("../public/icons/invalid.png");
+}
+
+.input-error {
+  border: 1px solid red;
+  border-radius: 2px;
+  padding: 4px 12px;
+  box-shadow: inset 1px 2px 4px rgba(255, 0, 0, 0.07);
+}
+
+.input-error:hover {
+  box-shadow: inset 1px 2px 8px rgba(255, 0, 0, 0.02);
+}
+
+.input-error:focus {
+  border: 1px solid red;
+  box-shadow: inset 1px 2px 4px rgba(255, 0, 0, 0.01),
+    0px 0px 8px rgba(255, 0, 0, 0.2);
 }
