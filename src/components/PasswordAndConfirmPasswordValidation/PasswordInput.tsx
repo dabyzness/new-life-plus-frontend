@@ -1,5 +1,6 @@
 import { link } from "fs";
-import React, { ChangeEventHandler, KeyboardEventHandler } from "react";
+import React, { useRef, ChangeEventHandler, KeyboardEventHandler } from "react";
+import { WasFocused } from "../RegistrationForm/RegistrationForm";
 import { PasswordError } from "./PasswordAndConfirmPasswordValidation";
 
 import styles from "./PasswordInput.module.css";
@@ -18,9 +19,21 @@ export interface PasswordInputProps {
   handleValidation: KeyboardEventHandler<HTMLInputElement>;
   passwordValue: string;
   passwordError: PasswordError<boolean>;
+  setWasFocused: Function;
+  wasFocused: WasFocused;
 }
 
 function PasswordInput(props: PasswordInputProps) {
+  const iconRef = useRef<HTMLElement>(null);
+
+  function handleBlur() {
+    if (!props.wasFocused.password) {
+      props.setWasFocused({ ...props.wasFocused, password: true });
+    }
+
+    return;
+  }
+
   return (
     <>
       <input
@@ -32,6 +45,7 @@ function PasswordInput(props: PasswordInputProps) {
         value={props.passwordValue}
         onChange={props.handleChange}
         onKeyUp={props.handleValidation}
+        onBlur={handleBlur}
         required
       />
       <label
@@ -40,6 +54,12 @@ function PasswordInput(props: PasswordInputProps) {
       >
         Password
       </label>
+      <i
+        className={`${props.wasFocused.password ? "validator-icon" : ""} ${
+          !props.passwordError.isCorrect ? "invalid-icon" : "valid-icon"
+        }`}
+        ref={iconRef}
+      ></i>
 
       <ul className={styles.validationPromptContainer}>
         {/* 

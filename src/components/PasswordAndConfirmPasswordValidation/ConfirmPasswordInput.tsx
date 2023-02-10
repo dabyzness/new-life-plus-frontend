@@ -1,4 +1,5 @@
-import React, { ChangeEventHandler, KeyboardEventHandler } from "react";
+import React, { useRef, ChangeEventHandler, KeyboardEventHandler } from "react";
+import { WasFocused } from "../RegistrationForm/RegistrationForm";
 
 import styles from "./ConfirmPasswordInput.module.css";
 
@@ -7,9 +8,20 @@ export interface ConfirmPasswordInputProps {
   confirmPasswordMatch: boolean;
   handleChange: ChangeEventHandler<HTMLInputElement>;
   handleValidation: KeyboardEventHandler<HTMLInputElement>;
+  setWasFocused: Function;
+  wasFocused: WasFocused;
 }
 
 function ConfirmPasswordInput(props: ConfirmPasswordInputProps) {
+  const iconRef = useRef<HTMLElement>(null);
+
+  function handleBlur() {
+    if (!props.wasFocused.confirmPassword) {
+      props.setWasFocused({ ...props.wasFocused, confirmPassword: true });
+    }
+    return;
+  }
+
   return (
     <>
       <input
@@ -23,6 +35,7 @@ function ConfirmPasswordInput(props: ConfirmPasswordInputProps) {
         value={props.passwordValue}
         onChange={props.handleChange}
         onKeyUp={props.handleValidation}
+        onBlur={handleBlur}
         required
       />
       <label
@@ -31,6 +44,16 @@ function ConfirmPasswordInput(props: ConfirmPasswordInputProps) {
       >
         Re-Enter Password
       </label>
+      <i
+        className={`${
+          props.wasFocused.confirmPassword ? "validator-icon" : ""
+        } ${
+          props.confirmPasswordMatch && props.passwordValue
+            ? "valid-icon"
+            : "invalid-icon"
+        }`}
+        ref={iconRef}
+      ></i>
 
       {/* <span className={""}></span> */}
 

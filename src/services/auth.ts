@@ -3,7 +3,7 @@ import { RegistrationFormData } from "../components/RegistrationForm/Registratio
 
 const BASE_URL = `${process.env.REACT_APP_BACKEND_SERVER_URL}`;
 
-async function register(user: RegistrationFormData) {
+async function register(user: RegistrationFormData<string>) {
   console.log(BASE_URL);
 
   try {

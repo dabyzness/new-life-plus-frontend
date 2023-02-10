@@ -1,6 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, useState, useEffect } from "react";
 import { PasswordInput } from "./PasswordInput";
 import { ConfirmPasswordInput } from "./ConfirmPasswordInput";
+import { WasFocused } from "../RegistrationForm/RegistrationForm";
 
 export interface PasswordsInput {
   password: string;
@@ -18,6 +19,8 @@ export interface PasswordError<T extends string | boolean> {
 
 export interface PasswordAndConfirmPasswordValidationProps {
   handleSetPassword: Function;
+  setWasFocused: Function;
+  wasFocused: WasFocused;
 }
 
 function PasswordAndConfirmPasswordValidation(
@@ -89,12 +92,16 @@ function PasswordAndConfirmPasswordValidation(
         handleValidation={handleValidation}
         passwordValue={passwordInput.password}
         passwordError={passwordError}
+        wasFocused={props.wasFocused}
+        setWasFocused={props.setWasFocused}
       />
       <ConfirmPasswordInput
         handleChange={handleChange}
         handleValidation={handleValidation}
         passwordValue={passwordInput.confirmPassword}
         confirmPasswordMatch={confirmPasswordMatch}
+        wasFocused={props.wasFocused}
+        setWasFocused={props.setWasFocused}
       />
     </>
   );

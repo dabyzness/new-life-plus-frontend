@@ -7,7 +7,7 @@ import {
 
 import { register } from "./services/auth";
 
-async function handleSubmitRegistration(user: RegistrationFormData) {
+async function handleSubmitRegistration(user: RegistrationFormData<string>) {
   const registrationData = await register(user);
 
   return registrationData;

@@ -5,10 +5,14 @@ import { UsernameInput } from "../UsernameInput/UsernameInput";
 
 import styles from "./RegistrationForm.module.css";
 
-export interface RegistrationFormData {
-  email: string;
-  password: string;
-  username: string;
+export interface RegistrationFormData<T extends string | boolean> {
+  email: T;
+  password: T;
+  username: T;
+}
+
+export interface WasFocused extends RegistrationFormData<boolean> {
+  confirmPassword: boolean;
 }
 
 export interface RegistrationFormProps {
@@ -16,10 +20,17 @@ export interface RegistrationFormProps {
 }
 
 function RegistrationForm(props: RegistrationFormProps) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RegistrationFormData<string>>({
     email: "",
     password: "",
     username: "",
+  });
+
+  const [wasFocused, setWasFocused] = useState<WasFocused>({
+    email: false,
+    password: false,
+    confirmPassword: false,
+    username: false,
   });
 
   function handleSetPassword(password: string) {
@@ -49,11 +60,21 @@ function RegistrationForm(props: RegistrationFormProps) {
         autoComplete="off"
         onSubmit={handleSubmit}
       >
-        <EmailInput handleSetEmail={handleSetEmail} />
+        <EmailInput
+          handleSetEmail={handleSetEmail}
+          wasFocused={wasFocused}
+          setWasFocused={setWasFocused}
+        />
         <PasswordAndConfirmPasswordValidation
           handleSetPassword={handleSetPassword}
+          wasFocused={wasFocused}
+          setWasFocused={setWasFocused}
         />
-        <UsernameInput handleSetUsername={handleSetUsername} />
+        <UsernameInput
+          handleSetUsername={handleSetUsername}
+          wasFocused={wasFocused}
+          setWasFocused={setWasFocused}
+        />
         <button type="submit">Submit</button>
       </form>
     </div>
