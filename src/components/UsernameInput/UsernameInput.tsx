@@ -30,16 +30,13 @@ function UsernameInput(props: UsernameInputProps) {
         type="text"
         autoComplete="off"
         name="username"
-        placeholder="Username"
+        // placeholder="Username"
         value={username}
         onChange={handleChange}
         onKeyUp={handleValidation}
         required
       />
-      <label
-        className={username ? "inputLabelVisible" : "inputLabelInvisible"}
-        htmlFor="username"
-      >
+      <label className={`${username ? "notEmpty" : ""}`} htmlFor="username">
         Username
       </label>
       {/* <p style={{ display: usernameError ? "block" : "none" }}>

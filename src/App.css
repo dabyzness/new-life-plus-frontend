@@ -6,22 +6,57 @@ body {
   align-items: center;
 }
 
-.inputLabelVisible {
+/* .inputLabelVisible {
   opacity: 1;
 }
 
 input:focus + .inputLabelVisible {
   font-weight: bold;
-}
+} */
 
 .inputLabelInvisible {
   opacity: 0;
   color: red;
 }
 input + label {
-  transform: translate(24px, -82px);
+  transform: translate(28px, -46px);
+  color: grey;
+  transition: 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+input:focus + label {
+  transform: translate(28px, -74px);
+  color: black;
+  font-weight: bold;
+}
+
+input:focus + label:after {
+  content: "*";
+}
+
+input {
+  outline: none;
+  outline-color: black;
+  border: 1px solid #d1d1d1;
+  border-radius: 2px;
+  padding: 4px 12px;
+  box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+input:hover {
+  box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
 }
 
 input:focus {
-  outline: 1px solid black;
+  color: #4b515d;
+  border: 1px solid #b8b6b6;
+  box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01),
+    0px 0px 8px rgba(0, 0, 0, 0.2);
+}
+
+.notEmpty {
+  transform: translate(28px, -78px);
+  color: black;
+  transition: 0.1s ease-in-out;
 }

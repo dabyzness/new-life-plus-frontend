@@ -19,16 +19,14 @@ function ConfirmPasswordInput(props: ConfirmPasswordInputProps) {
         type="password"
         name="confirmPassword"
         autoComplete="off"
-        placeholder="Re-enter Password"
+        // placeholder="Re-enter Password"
         value={props.passwordValue}
         onChange={props.handleChange}
         onKeyUp={props.handleValidation}
         required
       />
       <label
-        className={
-          props.passwordValue ? "inputLabelVisible" : "inputLabelInvisible"
-        }
+        className={`${props.passwordValue ? "notEmpty" : ""}`}
         htmlFor="confirmPassword"
       >
         Re-Enter Password

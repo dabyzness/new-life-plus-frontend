@@ -28,16 +28,14 @@ function PasswordInput(props: PasswordInputProps) {
         type="password"
         name="password"
         autoComplete="off"
-        placeholder="Password"
+        // placeholder="Password"
         value={props.passwordValue}
         onChange={props.handleChange}
         onKeyUp={props.handleValidation}
         required
       />
       <label
-        className={
-          props.passwordValue ? "inputLabelVisible" : "inputLabelInvisible"
-        }
+        className={`${props.passwordValue ? "notEmpty" : ""}`}
         htmlFor="password"
       >
         Password

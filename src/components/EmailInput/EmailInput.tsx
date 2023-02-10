@@ -30,16 +30,13 @@ function EmailInput(props: EmailInputProps) {
         type="email"
         name="email"
         autoComplete="off"
-        placeholder="E-mail"
+        // placeholder="E-mail"
         value={email}
         onChange={handleChange}
         onKeyUp={handleValidation}
         required
       />
-      <label
-        htmlFor="email"
-        className={email ? "inputLabelVisible" : "inputLabelInvisible"}
-      >
+      <label htmlFor="email" className={`${email ? "notEmpty" : ""}`}>
         E-mail
       </label>
       {/* <p style={{ display: emailError ? "block" : "none" }}>Email is invalid</p> */}
