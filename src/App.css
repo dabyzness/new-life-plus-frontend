@@ -19,14 +19,14 @@ input:focus + .inputLabelVisible {
   color: red;
 }
 input + label {
-  transform: translate(28px, -46px);
+  transform: translate(28px, -50px);
   color: grey;
   transition: 0.2s ease-in-out;
   pointer-events: none;
 }
 
 input:focus + label {
-  transform: translate(28px, -74px);
+  transform: translate(28px, -82px);
   color: black;
   font-weight: bold;
 }
@@ -41,7 +41,8 @@ input {
   border: 1px solid #d1d1d1;
   border-radius: 2px;
   padding: 4px 12px;
-  box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.07);
+  box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.07);
+  font-size: 18px;
 }
 
 input:hover {
@@ -49,14 +50,35 @@ input:hover {
 }
 
 input:focus {
-  color: #4b515d;
+  color: black;
   border: 1px solid #b8b6b6;
   box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01),
     0px 0px 8px rgba(0, 0, 0, 0.2);
 }
 
 .notEmpty {
-  transform: translate(28px, -78px);
+  transform: translate(28px, -82px);
   color: black;
   transition: 0.1s ease-in-out;
+}
+
+.notEmpty:after {
+  content: "*";
+}
+
+.validator-icon {
+  height: 18px;
+  width: 18px;
+  transform: translate(252px, -48px);
+  pointer-events: none;
+  background-size: contain;
+  margin-bottom: -18px;
+}
+
+.valid-icon {
+  background-image: url("../public/icons/valid.png");
+}
+
+.invalid-icon {
+  background-image: url("../public/icons/invalid.png");
 }

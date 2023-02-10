@@ -39,6 +39,13 @@ function EmailInput(props: EmailInputProps) {
       <label htmlFor="email" className={`${email ? "notEmpty" : ""}`}>
         E-mail
       </label>
+      <i
+        className={`validator-icon ${
+          emailError ? "invalid-icon" : "valid-icon"
+        }`}
+        // src={emailError ? "/icons/invalid.png" : "/icons/valid.png"}
+        // alt="valid-invalid"
+      ></i>
       {/* <p style={{ display: emailError ? "block" : "none" }}>Email is invalid</p> */}
     </>
   );
