@@ -96,3 +96,38 @@ input:focus {
   box-shadow: inset 1px 2px 4px rgba(255, 0, 0, 0.01),
     0px 0px 8px rgba(255, 0, 0, 0.2);
 }
+
+.validation-prompt-container {
+  height: 0;
+  list-style: none;
+  /* overflow-y: hidden; */
+  transition: 0.25s ease-in-out;
+  margin-top: -10px;
+  padding-left: 0px;
+}
+
+.input-error ~ .has-errors {
+  height: 100%;
+  /* margin-bottom: -5px; */
+}
+
+li::before {
+  height: 18px;
+  width: 18px;
+  content: "";
+  background-image: url("../public/icons/warning.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-left: 18px;
+}
+
+.input-invalid {
+  color: red;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.validation-prompt-container {
+  margin-left: 10px;
+}

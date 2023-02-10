@@ -60,6 +60,7 @@ function RegistrationForm(props: RegistrationFormProps) {
         autoComplete="off"
         onSubmit={handleSubmit}
       >
+        <h2>Sign-Up</h2>
         <EmailInput
           handleSetEmail={handleSetEmail}
           wasFocused={wasFocused}

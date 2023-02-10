@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useState, useRef } from "react";
+import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { WasFocused } from "../RegistrationForm/RegistrationForm";
 
 export interface EmailInputProps {
@@ -10,8 +10,6 @@ export interface EmailInputProps {
 function EmailInput(props: EmailInputProps) {
   const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState<boolean>(true);
-
-  const iconRef = useRef<HTMLElement>(null);
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setEmail(e.target?.value);
@@ -60,9 +58,24 @@ function EmailInput(props: EmailInputProps) {
         className={`${props.wasFocused.email ? "validator-icon" : ""} ${
           emailError ? "invalid-icon" : "valid-icon"
         }`}
-        ref={iconRef}
       ></i>
-      {/* <p style={{ display: emailError ? "block" : "none" }}>Email is invalid</p> */}
+
+      <ul
+        className={`validation-prompt-container ${
+          emailError && props.wasFocused.email ? "has-errors" : ""
+        }`}
+      >
+        <li
+          className={`${
+            !email && props.wasFocused.email ? "input-invalid" : ""
+          }`}
+        >
+          Invalid e-mail
+        </li>
+        <li className={`${emailError ? "input-invalid" : ""}`}>
+          E-mail is required
+        </li>
+      </ul>
     </>
   );
 }
