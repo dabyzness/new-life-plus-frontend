@@ -57,6 +57,36 @@ function ConfirmPasswordInput(props: ConfirmPasswordInputProps) {
         ref={iconRef}
       ></i>
 
+      <ul
+        className={`validation-prompt-container ${
+          !props.confirmPasswordMatch && props.wasFocused.confirmPassword
+            ? "has-errors"
+            : ""
+        }`}
+      >
+        <li
+          className={`${
+            !props.confirmPasswordMatch &&
+            props.wasFocused.confirmPassword &&
+            props.passwordValue
+              ? "input-invalid"
+              : "input-valid"
+          }`}
+        >
+          Password does not match
+        </li>
+
+        <li
+          className={`${
+            !props.passwordValue && props.wasFocused.confirmPassword
+              ? "input-invalid"
+              : "input-valid"
+          }`}
+        >
+          Password confirmation is required
+        </li>
+      </ul>
+
       {/* <span className={""}></span> */}
 
       {/* <div

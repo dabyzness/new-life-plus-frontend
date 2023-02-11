@@ -43,6 +43,7 @@ function UsernameInput(props: UsernameInputProps) {
         }`}
         type="text"
         autoComplete="off"
+        spellCheck="false"
         name="username"
         // placeholder="Username"
         value={username}
@@ -59,9 +60,32 @@ function UsernameInput(props: UsernameInputProps) {
           usernameError ? "invalid-icon" : "valid-icon"
         }`}
       ></i>
-      {/* <p style={{ display: usernameError ? "block" : "none" }}>
-        Invalid Username
-      </p> */}
+
+      <ul
+        className={`validation-prompt-container ${
+          usernameError && props.wasFocused.username ? "has-errors" : ""
+        }`}
+      >
+        <li
+          className={`${
+            usernameError && props.wasFocused.username && username
+              ? "input-invalid"
+              : "input-valid"
+          }`}
+        >
+          Invalid username
+        </li>
+
+        <li
+          className={`${
+            !username && props.wasFocused.username
+              ? "input-invalid"
+              : "input-valid"
+          }`}
+        >
+          Username is required
+        </li>
+      </ul>
     </>
   );
 }

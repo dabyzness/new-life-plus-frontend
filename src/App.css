@@ -100,15 +100,19 @@ input:focus {
 .validation-prompt-container {
   height: 0;
   list-style: none;
-  /* overflow-y: hidden; */
+  overflow-y: hidden;
   transition: 0.25s ease-in-out;
   margin-top: -10px;
   padding-left: 0px;
 }
 
+.has-errors {
+  height: 0;
+  transition: 1s ease-in-out;
+}
+
 .input-error ~ .has-errors {
   height: 100%;
-  /* margin-bottom: -5px; */
 }
 
 li::before {
@@ -128,6 +132,10 @@ li::before {
   line-height: 20px;
 }
 
+.input-valid {
+  display: none;
+}
+
 .validation-prompt-container {
-  margin-left: 10px;
+  margin-left: 16px;
 }

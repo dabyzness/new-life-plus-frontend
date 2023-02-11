@@ -67,13 +67,20 @@ function EmailInput(props: EmailInputProps) {
       >
         <li
           className={`${
-            !email && props.wasFocused.email ? "input-invalid" : ""
+            !email && props.wasFocused.email ? "input-invalid" : "input-valid"
+          }`}
+        >
+          E-mail is required
+        </li>
+
+        <li
+          className={`${
+            emailError && props.wasFocused.email && email
+              ? "input-invalid"
+              : "input-valid"
           }`}
         >
           Invalid e-mail
-        </li>
-        <li className={`${emailError ? "input-invalid" : ""}`}>
-          E-mail is required
         </li>
       </ul>
     </>
