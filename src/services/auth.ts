@@ -1,6 +1,7 @@
-import axios, { Axios, AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { LoginFormData } from "../components/LoginForm/LoginForm";
 import { RegistrationFormData } from "../components/RegistrationForm/RegistrationForm";
+import { setAuthToken } from "../helpers/setAuthToken";
 
 const BASE_URL = `${process.env.REACT_APP_BACKEND_SERVER_URL}`;
 
@@ -36,7 +37,10 @@ async function login(user: LoginFormData) {
 
     const json = await res.data;
 
+    // Put token into local storage
     localStorage.setItem("token", json.token);
+    // Add token to axios headers
+    setAuthToken(json.token);
 
     return json;
   } catch (error) {

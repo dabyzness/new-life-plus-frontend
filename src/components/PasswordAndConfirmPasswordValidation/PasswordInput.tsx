@@ -1,5 +1,4 @@
-import { link } from "fs";
-import React, { useRef, ChangeEventHandler, KeyboardEventHandler } from "react";
+import { useRef, ChangeEventHandler, KeyboardEventHandler } from "react";
 import { WasFocused } from "../RegistrationForm/RegistrationForm";
 import { PasswordError } from "./PasswordAndConfirmPasswordValidation";
 

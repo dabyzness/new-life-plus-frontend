@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { PasswordAndConfirmPasswordValidation } from "../PasswordAndConfirmPasswordValidation/PasswordAndConfirmPasswordValidation";
 import { EmailInput } from "../EmailInput/EmailInput";
 import { UsernameInput } from "../UsernameInput/UsernameInput";

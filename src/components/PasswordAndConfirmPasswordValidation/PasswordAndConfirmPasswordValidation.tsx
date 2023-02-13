@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useState, useEffect } from "react";
+import { ChangeEvent, KeyboardEvent, useState, useEffect } from "react";
 import { PasswordInput } from "./PasswordInput";
 import { ConfirmPasswordInput } from "./ConfirmPasswordInput";
 import { WasFocused } from "../RegistrationForm/RegistrationForm";
