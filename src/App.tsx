@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import { LoginForm, LoginFormData } from "./components/LoginForm/LoginForm";
@@ -8,6 +8,12 @@ import {
 } from "./components/RegistrationForm/RegistrationForm";
 
 import { login, register } from "./services/auth";
+import { getToken } from "./services/token";
+
+export interface User {
+  id: string;
+  username: string;
+}
 
 async function handleSubmitRegistration(user: RegistrationFormData<string>) {
   const registrationData = await register(user);
@@ -22,6 +28,10 @@ async function handleSubmitLogin(user: LoginFormData) {
 }
 
 function App() {
+  const [user, setUser] = useState();
+
+  getToken();
+
   return (
     <div className="App">
       <Routes>
