@@ -115,6 +115,10 @@ input:focus {
   height: 100%;
 }
 
+.login-error ~ .has-errors {
+  height: 100%;
+}
+
 li::before {
   height: 18px;
   width: 18px;

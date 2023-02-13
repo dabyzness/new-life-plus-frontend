@@ -39,3 +39,9 @@ label {
   left: 0;
   transform: translateX(24px);
 }
+
+.link {
+  font-size: 12px;
+  transform: translate(0, 24px);
+  text-align: center;
+}

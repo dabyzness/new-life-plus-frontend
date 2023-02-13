@@ -18,3 +18,7 @@
   transform: translate(0, 24px);
   text-align: center;
 }
+
+.login-error ~ .has-errors {
+  height: 100%;
+}

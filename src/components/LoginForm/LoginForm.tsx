@@ -16,13 +16,18 @@ function LoginForm(props: LoginFormProps) {
     email: "",
     password: "",
   });
+  const [hasError, setHasError] = useState<boolean>(false);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const data = await props.handleSubmitLogin(formData);
 
-    console.log(data);
+    if (data instanceof Error) {
+      setHasError(true);
+    } else {
+      setHasError(false);
+    }
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -33,18 +38,45 @@ function LoginForm(props: LoginFormProps) {
     <div className={styles.formContainer}>
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <h2>Log in</h2>
-        <input type="text" name="email" onChange={handleChange} required />
-        <label htmlFor="email">E-mail</label>
+        <input
+          type="text"
+          name="email"
+          autoCorrect="false"
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="email" className={formData.email ? "notEmpty" : ""}>
+          E-mail
+        </label>
 
         <input
           type="password"
           name="password"
+          className={hasError ? "login-error" : ""}
           onChange={handleChange}
           required
         />
-        <label htmlFor="password">Password</label>
+        <label
+          htmlFor="password"
+          className={formData.password ? "notEmpty" : ""}
+        >
+          Password
+        </label>
 
-        <button type="submit">Submit</button>
+        <ul
+          className={`validation-prompt-container ${
+            hasError ? "has-errors" : ""
+          }`}
+        >
+          <li className={`input-invalid`}>Username or password is incorrect</li>
+        </ul>
+
+        <button
+          type="submit"
+          disabled={!formData.email || !formData.password ? true : false}
+        >
+          Submit
+        </button>
         <a href="/signup" className={styles.link}>
           Don't have an account? Register here
         </a>

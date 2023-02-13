@@ -110,6 +110,9 @@ function RegistrationForm(props: RegistrationFormProps) {
         >
           Submit
         </button>
+        <a href="/login" className={styles.link}>
+          Already have an account? Login here
+        </a>
       </form>
     </div>
   );

@@ -36,12 +36,16 @@ async function login(user: LoginFormData) {
 
     const json = await res.data;
 
+    localStorage.setItem("token", json.token);
+
     return json;
   } catch (error) {
+    // Error for username or password being wrong
     if (error instanceof AxiosError) {
-      return error.response?.data.message;
+      return new Error(error.response?.data.message);
     }
 
+    // Other error handling. Replace with better handling later
     return new Error("Something went wrong");
   }
 }
