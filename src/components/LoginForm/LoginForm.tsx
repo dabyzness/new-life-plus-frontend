@@ -45,6 +45,9 @@ function LoginForm(props: LoginFormProps) {
         <label htmlFor="password">Password</label>
 
         <button type="submit">Submit</button>
+        <a href="/signup" className={styles.link}>
+          Don't have an account? Register here
+        </a>
       </form>
     </div>
   );

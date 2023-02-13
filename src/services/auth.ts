@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { Axios, AxiosError } from "axios";
 import { LoginFormData } from "../components/LoginForm/LoginForm";
 import { RegistrationFormData } from "../components/RegistrationForm/RegistrationForm";
 
@@ -16,8 +16,12 @@ async function register(user: RegistrationFormData<string>) {
     const json = await res.data;
 
     return json;
-  } catch (err) {
-    return err;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      // return error.response?.data;
+      return new Error(JSON.stringify(error.response?.data));
+    }
+    return error;
   }
 }
 

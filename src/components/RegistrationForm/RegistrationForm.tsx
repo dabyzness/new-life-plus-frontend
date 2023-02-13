@@ -33,6 +33,14 @@ function RegistrationForm(props: RegistrationFormProps) {
     username: false,
   });
 
+  const [errorMessageTaken, setErrorMessageTaken] = useState<
+    RegistrationFormData<boolean>
+  >({
+    email: false,
+    password: false,
+    username: false,
+  });
+
   function handleSetPassword(password: string) {
     setFormData({ ...formData, password });
   }
@@ -50,7 +58,19 @@ function RegistrationForm(props: RegistrationFormProps) {
 
     const data = await props.handleSubmitRegistration(formData);
 
-    console.log(data);
+    if (data instanceof Error) {
+      // If there's an error in registering, one of the fields must be taken, so we pass errors down.
+      const target: string = JSON.parse(data.message).meta.target[0];
+      setErrorMessageTaken({ ...errorMessageTaken, [target]: true });
+    } else {
+      // Set all values in errorMessageTaken to false
+      const temp = {} as RegistrationFormData<boolean>;
+      Object.keys(errorMessageTaken).forEach((key) => {
+        temp[key as keyof typeof temp] = false;
+      });
+
+      setErrorMessageTaken(temp);
+    }
 
     // Insert Navigate here to get us off of the page
   }
@@ -67,6 +87,7 @@ function RegistrationForm(props: RegistrationFormProps) {
           handleSetEmail={handleSetEmail}
           wasFocused={wasFocused}
           setWasFocused={setWasFocused}
+          isTaken={errorMessageTaken.email}
         />
         <PasswordAndConfirmPasswordValidation
           handleSetPassword={handleSetPassword}
@@ -77,6 +98,7 @@ function RegistrationForm(props: RegistrationFormProps) {
           handleSetUsername={handleSetUsername}
           wasFocused={wasFocused}
           setWasFocused={setWasFocused}
+          isTaken={errorMessageTaken.username}
         />
         <button
           type="submit"

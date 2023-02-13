@@ -12,3 +12,9 @@
   padding: 40px;
   border-radius: 10px;
 }
+
+.link {
+  font-size: 12px;
+  transform: translate(0, 24px);
+  text-align: center;
+}

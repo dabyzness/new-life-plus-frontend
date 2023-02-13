@@ -5,6 +5,7 @@ export interface UsernameInputProps {
   handleSetUsername: Function;
   setWasFocused: Function;
   wasFocused: WasFocused;
+  isTaken: boolean;
 }
 
 function UsernameInput(props: UsernameInputProps) {
@@ -39,7 +40,9 @@ function UsernameInput(props: UsernameInputProps) {
     <>
       <input
         className={`${
-          usernameError && props.wasFocused.username ? "input-error" : ""
+          props.isTaken || (usernameError && props.wasFocused.username)
+            ? "input-error"
+            : ""
         }`}
         type="text"
         autoComplete="off"
@@ -57,13 +60,15 @@ function UsernameInput(props: UsernameInputProps) {
       </label>
       <i
         className={`${props.wasFocused.username ? "validator-icon" : ""} ${
-          usernameError ? "invalid-icon" : "valid-icon"
+          props.isTaken || usernameError ? "invalid-icon" : "valid-icon"
         }`}
       ></i>
 
       <ul
         className={`validation-prompt-container ${
-          usernameError && props.wasFocused.username ? "has-errors" : ""
+          props.isTaken || (usernameError && props.wasFocused.username)
+            ? "has-errors"
+            : ""
         }`}
       >
         <li
@@ -84,6 +89,10 @@ function UsernameInput(props: UsernameInputProps) {
           }`}
         >
           Username is required
+        </li>
+
+        <li className={`${props.isTaken ? "input-invalid" : "input-valid"}`}>
+          Username is taken
         </li>
       </ul>
     </>

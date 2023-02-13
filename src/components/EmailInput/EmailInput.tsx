@@ -5,6 +5,7 @@ export interface EmailInputProps {
   handleSetEmail: Function;
   setWasFocused: Function;
   wasFocused: WasFocused;
+  isTaken: boolean;
 }
 
 function EmailInput(props: EmailInputProps) {
@@ -31,6 +32,7 @@ function EmailInput(props: EmailInputProps) {
     if (!props.wasFocused.email) {
       props.setWasFocused({ ...props.wasFocused, email: true });
     }
+    console.log(props.isTaken);
 
     return;
   }
@@ -39,7 +41,9 @@ function EmailInput(props: EmailInputProps) {
     <>
       <input
         className={`${
-          emailError && props.wasFocused.email ? "input-error" : ""
+          props.isTaken || (emailError && props.wasFocused.email)
+            ? "input-error"
+            : ""
         }`}
         type="email"
         name="email"
@@ -56,13 +60,15 @@ function EmailInput(props: EmailInputProps) {
       </label>
       <i
         className={`${props.wasFocused.email ? "validator-icon" : ""} ${
-          emailError ? "invalid-icon" : "valid-icon"
+          emailError || props.isTaken ? "invalid-icon" : "valid-icon"
         }`}
       ></i>
 
       <ul
         className={`validation-prompt-container ${
-          emailError && props.wasFocused.email ? "has-errors" : ""
+          props.isTaken || (emailError && props.wasFocused.email)
+            ? "has-errors"
+            : ""
         }`}
       >
         <li
@@ -81,6 +87,10 @@ function EmailInput(props: EmailInputProps) {
           }`}
         >
           Invalid e-mail
+        </li>
+
+        <li className={`${props.isTaken ? "input-invalid" : "input-valid"}`}>
+          E-mail is already in use
         </li>
       </ul>
     </>

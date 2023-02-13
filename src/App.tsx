@@ -1,4 +1,5 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import { LoginForm, LoginFormData } from "./components/LoginForm/LoginForm";
 import {
@@ -23,8 +24,20 @@ async function handleSubmitLogin(user: LoginFormData) {
 function App() {
   return (
     <div className="App">
-      <RegistrationForm handleSubmitRegistration={handleSubmitRegistration} />
-      <LoginForm handleSubmitLogin={handleSubmitLogin} />
+      <Routes>
+        <Route
+          path="/signup"
+          element={
+            <RegistrationForm
+              handleSubmitRegistration={handleSubmitRegistration}
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={<LoginForm handleSubmitLogin={handleSubmitLogin} />}
+        />
+      </Routes>
     </div>
   );
 }
