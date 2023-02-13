@@ -48,7 +48,9 @@ function RegistrationForm(props: RegistrationFormProps) {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    props.handleSubmitRegistration(formData);
+    const data = await props.handleSubmitRegistration(formData);
+
+    console.log(data);
 
     // Insert Navigate here to get us off of the page
   }
@@ -76,7 +78,16 @@ function RegistrationForm(props: RegistrationFormProps) {
           wasFocused={wasFocused}
           setWasFocused={setWasFocused}
         />
-        <button type="submit">Submit</button>
+        <button
+          type="submit"
+          disabled={
+            !formData.email || !formData.password || !formData.username
+              ? true
+              : false
+          }
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

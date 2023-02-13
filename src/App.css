@@ -139,3 +139,28 @@ li::before {
 .validation-prompt-container {
   margin-left: 16px;
 }
+
+button[type="submit"] {
+  transition: 0.25s ease-in-out;
+  height: 46px;
+  width: 40%;
+  margin: 0 auto;
+  font-size: 24px;
+  background-color: rgb(94, 221, 96);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px rgba(70, 67, 67, 0.2),
+    -3px -3px 5px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  box-shadow: 3px 3px 5px rgba(70, 67, 67, 0.2),
+    -3px -3px 5px rgba(0, 0, 0, 0.2);
+}
+
+button[disabled] {
+  background-color: gray;
+  box-shadow: none;
+}
