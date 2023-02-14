@@ -3,8 +3,6 @@ import styles from "./AvatarDisplay.module.css";
 interface AvatarDisplayProps {
   avatar: string | null;
   username: string;
-  level: number;
-  experience: number;
 }
 
 function AvatarDisplay(props: AvatarDisplayProps) {

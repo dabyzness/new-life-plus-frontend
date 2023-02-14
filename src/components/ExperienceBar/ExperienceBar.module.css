@@ -1,0 +1,72 @@
+.container {
+  position: relative;
+
+  width: 200px;
+  height: 48px;
+  /* background-color: whitesmoke; */
+  margin: 24px;
+
+  display: flex;
+  align-items: center;
+}
+
+.experienceBarBorder {
+  position: absolute;
+  height: 24px;
+  width: 90%;
+
+  /* background-color: aqua; */
+  border: 3px solid #05b9b9;
+  border-radius: 50px;
+  text-align: center;
+}
+
+.experienceBarBorder > p {
+  margin: auto;
+  padding-top: 1.5px;
+  font-weight: bold;
+  transition: 0.1s ease-in-out;
+  opacity: 0;
+}
+
+.experienceBarBorder:hover > p {
+  opacity: 1;
+}
+
+.progress {
+  /* position: absolute; */
+  height: 24px;
+  margin-left: 3px;
+
+  background-color: aqua;
+  /* border-bottom-left-radius: 50px; */
+  /* border-top-left-radius: 50px; */
+  border-radius: 50px 0 0 50px;
+}
+
+.star {
+  position: relative;
+  height: 100%;
+  width: 50px;
+  margin-left: auto;
+}
+
+.star > img {
+  position: absolute;
+  color: aqua;
+  height: 120%;
+  margin-top: -10%;
+}
+
+.star > p {
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  z-index: 100;
+  color: white;
+  font-size: 24px;
+  margin: 0;
+  margin-left: auto;
+  top: 20%;
+  left: 42%;
+}

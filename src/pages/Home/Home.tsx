@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import { ExperienceBar } from "../../components/ExperienceBar/ExperienceBar";
 import { ProfileDisplay } from "../../components/ProfileDisplay/ProfileDisplay";
 import { Loading } from "../Loading/Loading";
 
