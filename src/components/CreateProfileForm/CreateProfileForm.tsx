@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { User } from "../../App";
 
 export interface CreateProfileFormProps {
   handleSubmitCreateProfile: Function;

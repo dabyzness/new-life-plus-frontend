@@ -14,17 +14,11 @@ import { login, register } from "./services/auth";
 import { createProfile, getProfile } from "./services/profile";
 import { getUserFromToken } from "./services/token";
 
-export interface User {
-  id: number;
-  username: string;
-}
-
 function App() {
   const [user, setUser] = useState<User | null>(getUserFromToken());
   const [profile, setProfile] = useState<any>(null);
 
   useEffect(() => {
-    console.log("UH HUH HONEY");
     if (!user) {
       setProfile(null);
       return;
@@ -36,8 +30,6 @@ function App() {
         setProfile(null);
         return;
       }
-
-      console.log(`SHEESH`, data);
       setProfile(data);
     };
 

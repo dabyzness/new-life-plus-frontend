@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { User } from "../../App";
 
 import styles from "./LoginForm.module.css";
 

@@ -4,7 +4,6 @@ import { EmailInput } from "../EmailInput/EmailInput";
 import { UsernameInput } from "../UsernameInput/UsernameInput";
 
 import styles from "./RegistrationForm.module.css";
-import { User } from "../../App";
 import { Navigate } from "react-router-dom";
 
 export interface RegistrationFormData<T extends string | boolean> {

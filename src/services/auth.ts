@@ -1,5 +1,4 @@
 import axios, { AxiosError } from "axios";
-import { User } from "../App";
 import { LoginFormData } from "../components/LoginForm/LoginForm";
 import { RegistrationFormData } from "../components/RegistrationForm/RegistrationForm";
 import { setAuthToken } from "../helpers/setAuthToken";

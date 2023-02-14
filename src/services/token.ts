@@ -1,5 +1,4 @@
 import jwtDecode, { JwtPayload } from "jwt-decode";
-import { User } from "../App";
 
 export interface JWTUserPayload extends JwtPayload {
   exp: number;
