@@ -3,6 +3,7 @@ import { User } from "../App";
 import { LoginFormData } from "../components/LoginForm/LoginForm";
 import { RegistrationFormData } from "../components/RegistrationForm/RegistrationForm";
 import { setAuthToken } from "../helpers/setAuthToken";
+import { createProfile } from "./profile";
 import { setToken } from "./token";
 
 const BASE_URL = `${process.env.REACT_APP_BACKEND_SERVER_URL}`;
@@ -24,6 +25,16 @@ async function register(
     });
 
     const json = await res.data;
+    console.log(`USER`, json);
+
+    // Put token into local storage
+    setToken(json.token);
+    // Add token to axios headers
+    setAuthToken(json.token);
+
+    const profileRes = await createProfile(json.user?.username, "Alfred");
+    const profile = await profileRes.data;
+    console.log(`PROFILE`, profile);
 
     return json;
   } catch (error) {
