@@ -1,3 +1,4 @@
+import { Attributes } from "../Attributes/Attributes";
 import { AvatarDisplay } from "../AvatarDisplay/AvatarDisplay";
 import { ExperienceBar } from "../ExperienceBar/ExperienceBar";
 
@@ -8,12 +9,31 @@ interface ProfileDisplayProps {
 }
 
 function ProfileDisplay(props: ProfileDisplayProps) {
-  const { avatar, username, level, experience } = props.profile;
+  const {
+    avatar,
+    username,
+    level,
+    experience,
+    health,
+    strength,
+    intellect,
+    charisma,
+    gold,
+  } = props.profile;
 
   return (
     <div className={styles.container}>
-      <AvatarDisplay avatar={avatar} username={username} />
-      <ExperienceBar level={level} experience={experience} />
+      <div className={styles.avatarContainer}>
+        <AvatarDisplay avatar={avatar} username={username} />
+        <ExperienceBar level={level} experience={experience} />
+      </div>
+      <Attributes
+        health={health}
+        strength={strength}
+        intellect={intellect}
+        charisma={charisma}
+        gold={gold}
+      />
       {/* Avatar broder Image */}
       {/* Current Level */}
       {/* Stats */}

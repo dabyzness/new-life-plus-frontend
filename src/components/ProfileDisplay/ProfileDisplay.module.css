@@ -1,5 +1,9 @@
 .container {
   display: flex;
+}
+
+.avatarContainer {
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
