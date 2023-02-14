@@ -27,7 +27,7 @@ async function createProfile(username: string, name: string) {
   }
 }
 
-async function getProfile(username: string) {
+async function getProfile(username: string | undefined) {
   try {
     const res = await axios.request({
       method: "get",

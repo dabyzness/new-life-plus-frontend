@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import { getProfileData } from "../../services/profile";
 
 export interface HomeProps {
@@ -5,9 +6,7 @@ export interface HomeProps {
 }
 
 function Home(props: HomeProps) {
-  getProfileData();
-
-  return <div>YOU'RE LOGGED IN!</div>;
+  return <div>{!props.profile && <Navigate to="/createProfile" />}</div>;
 }
 
 export { Home };

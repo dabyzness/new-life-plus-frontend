@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Routes, Route, redirect } from "react-router-dom";
 import "./App.css";
+import { CreateProfileForm } from "./components/CreateProfileForm/CreateProfileForm";
 import { LoginForm, LoginFormData } from "./components/LoginForm/LoginForm";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import {
@@ -10,6 +11,7 @@ import {
 import { Home } from "./pages/Home/Home";
 
 import { login, register } from "./services/auth";
+import { createProfile, getProfile } from "./services/profile";
 import { getUserFromToken } from "./services/token";
 
 export interface User {
@@ -19,11 +21,16 @@ export interface User {
 
 function App() {
   const [user, setUser] = useState<User | null>(getUserFromToken());
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<any>(getProfile(user?.username));
 
   async function handleSubmitRegistration(user: RegistrationFormData<string>) {
     const registrationData = await register(user);
 
+    if (registrationData instanceof Error) {
+      return registrationData;
+    }
+
+    setUser(registrationData.user);
     return registrationData;
   }
 
@@ -36,6 +43,20 @@ function App() {
 
     setUser(loginData.user);
     return loginData;
+  }
+
+  async function handleSubmitCreateProfile(formData: any) {
+    if (!user) {
+      return;
+    }
+
+    const profile = await createProfile(user?.username, formData.name);
+
+    console.log(profile);
+
+    setProfile(profile);
+
+    redirect("/home");
   }
 
   return (
@@ -57,6 +78,18 @@ function App() {
             <LoginForm user={user} handleSubmitLogin={handleSubmitLogin} />
           }
         />
+
+        <Route
+          path="/createProfile"
+          element={
+            <ProtectedRoute user={user}>
+              <CreateProfileForm
+                handleSubmitCreateProfile={handleSubmitCreateProfile}
+              />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/home"
           element={
