@@ -31,16 +31,16 @@ async function getProfile(username: string | undefined) {
   try {
     const res = await axios.request({
       method: "get",
-      url: `${BASE_URL}/api/profile`,
+      url: `${BASE_URL}/api/profile/${username}`,
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${getToken()}`,
       },
     });
 
-    const profile = await res.data;
+    return await res.data;
 
-    return profile;
+    // return profile;
   } catch (error) {
     if (error instanceof AxiosError) {
       // return error.response?.data;

@@ -1,12 +1,16 @@
 import { Navigate } from "react-router-dom";
-import { getProfileData } from "../../services/profile";
+import { Loading } from "../Loading/Loading";
 
 export interface HomeProps {
   profile: any;
 }
 
 function Home(props: HomeProps) {
-  return <div>{!props.profile && <Navigate to="/createProfile" />}</div>;
+  if (!props.profile) {
+    return <Loading />;
+  }
+
+  return <div>{props.profile && <div>{props.profile.username}</div>}</div>;
 }
 
 export { Home };

@@ -21,7 +21,28 @@ export interface User {
 
 function App() {
   const [user, setUser] = useState<User | null>(getUserFromToken());
-  const [profile, setProfile] = useState<any>(getProfile(user?.username));
+  const [profile, setProfile] = useState<any>(null);
+
+  useEffect(() => {
+    console.log("UH HUH HONEY");
+    if (!user) {
+      setProfile(null);
+      return;
+    }
+    const fetchProfile = async () => {
+      const data = await getProfile(user.username);
+
+      if (data instanceof Error) {
+        setProfile(null);
+        return;
+      }
+
+      console.log(`SHEESH`, data);
+      setProfile(data);
+    };
+
+    fetchProfile();
+  }, [user]);
 
   async function handleSubmitRegistration(user: RegistrationFormData<string>) {
     const registrationData = await register(user);
@@ -56,7 +77,7 @@ function App() {
 
     setProfile(profile);
 
-    redirect("/home");
+    return redirect("/home");
   }
 
   return (
