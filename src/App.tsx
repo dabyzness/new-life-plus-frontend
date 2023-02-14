@@ -16,7 +16,7 @@ import { getUserFromToken } from "./services/token";
 
 function App() {
   const [user, setUser] = useState<User | null>(getUserFromToken());
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
 
   useEffect(() => {
     if (!user) {
@@ -58,14 +58,16 @@ function App() {
     return loginData;
   }
 
-  async function handleSubmitCreateProfile(formData: any) {
+  async function handleSubmitCreateProfile(formData: CreateProfileFormData) {
     if (!user) {
       return;
     }
 
     const profile = await createProfile(user?.username, formData.name);
 
-    console.log(profile);
+    if (profile instanceof Error) {
+      return profile;
+    }
 
     setProfile(profile);
 

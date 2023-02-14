@@ -5,7 +5,7 @@ export interface CreateProfileFormProps {
 }
 
 function CreateProfileForm(props: CreateProfileFormProps) {
-  const [formData, setFormData] = useState<any>({
+  const [formData, setFormData] = useState<CreateProfileFormData>({
     name: "",
   });
 

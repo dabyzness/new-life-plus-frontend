@@ -3,7 +3,10 @@ import { getToken } from "./token";
 
 const BASE_URL = `${process.env.REACT_APP_BACKEND_SERVER_URL}`;
 
-async function createProfile(username: string, name: string) {
+async function createProfile(
+  username: string,
+  name: string
+): Promise<Profile | Error> {
   try {
     const res = await axios.request({
       method: "post",
@@ -15,19 +18,20 @@ async function createProfile(username: string, name: string) {
       data: { username, name },
     });
 
-    const profile = await res.data;
+    const profile = (await res.data) as Profile;
 
     return profile;
   } catch (error) {
     if (error instanceof AxiosError) {
-      // return error.response?.data;
       return new Error(JSON.stringify(error.response?.data));
     }
     return error as Error;
   }
 }
 
-async function getProfile(username: string | undefined) {
+async function getProfile(
+  username: string | undefined
+): Promise<Profile | Error> {
   try {
     const res = await axios.request({
       method: "get",
@@ -38,27 +42,14 @@ async function getProfile(username: string | undefined) {
       },
     });
 
-    return await res.data;
-
-    // return profile;
+    const profile = (await res.data) as Profile;
+    return profile;
   } catch (error) {
     if (error instanceof AxiosError) {
-      // return error.response?.data;
       return new Error(JSON.stringify(error.response?.data));
     }
     return error as Error;
   }
 }
 
-async function getProfileData() {
-  await axios.request({
-    method: "get",
-    url: `${BASE_URL}/api/attribute`,
-    headers: {
-      "Content-type": "application/json",
-      Authorization: `Bearer ${getToken()}`,
-    },
-  });
-}
-
-export { createProfile, getProfile, getProfileData };
+export { createProfile, getProfile };
