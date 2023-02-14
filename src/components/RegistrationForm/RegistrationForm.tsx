@@ -4,6 +4,8 @@ import { EmailInput } from "../EmailInput/EmailInput";
 import { UsernameInput } from "../UsernameInput/UsernameInput";
 
 import styles from "./RegistrationForm.module.css";
+import { User } from "../../App";
+import { Navigate } from "react-router-dom";
 
 export interface RegistrationFormData<T extends string | boolean> {
   email: T;
@@ -17,6 +19,7 @@ export interface WasFocused extends RegistrationFormData<boolean> {
 
 export interface RegistrationFormProps {
   handleSubmitRegistration: Function;
+  user: User | null;
 }
 
 function RegistrationForm(props: RegistrationFormProps) {
@@ -71,12 +74,11 @@ function RegistrationForm(props: RegistrationFormProps) {
 
       setErrorMessageTaken(temp);
     }
-
-    // Insert Navigate here to get us off of the page
   }
 
   return (
     <div className={styles.formContainer}>
+      {props.user && <Navigate to="/home" />}
       <form
         className={styles.registrationForm}
         autoComplete="off"

@@ -3,7 +3,7 @@ import { User } from "../App";
 
 export interface JWTUserPayload extends JwtPayload {
   exp: number;
-  id: string;
+  id: number;
   username: string;
 }
 
@@ -34,7 +34,7 @@ function getUserFromToken(): User | null {
   }
 
   const { id, username } = jwtDecode<JWTUserPayload>(token);
-  const user: User = { id, username };
+  const user: User = { id: Number(id), username };
 
   return user;
 }

@@ -9,11 +9,11 @@ import {
 } from "./components/RegistrationForm/RegistrationForm";
 import { Home } from "./pages/Home/Home";
 
-import { login, register, AuthResponseJSON } from "./services/auth";
+import { login, register } from "./services/auth";
 import { getUserFromToken } from "./services/token";
 
 export interface User {
-  id: string;
+  id: number;
   username: string;
 }
 
@@ -44,6 +44,7 @@ function App() {
           path="/signup"
           element={
             <RegistrationForm
+              user={user}
               handleSubmitRegistration={handleSubmitRegistration}
             />
           }
