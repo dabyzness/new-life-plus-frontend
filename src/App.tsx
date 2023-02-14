@@ -19,6 +19,7 @@ export interface User {
 
 function App() {
   const [user, setUser] = useState<User | null>(getUserFromToken());
+  const [profile, setProfile] = useState<any>(null);
 
   async function handleSubmitRegistration(user: RegistrationFormData<string>) {
     const registrationData = await register(user);
@@ -60,7 +61,7 @@ function App() {
           path="/home"
           element={
             <ProtectedRoute user={user}>
-              <Home />
+              <Home profile={profile} />
             </ProtectedRoute>
           }
         />

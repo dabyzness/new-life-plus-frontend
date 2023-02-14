@@ -1,6 +1,10 @@
 import { getProfileData } from "../../services/profile";
 
-function Home() {
+export interface HomeProps {
+  profile: any;
+}
+
+function Home(props: HomeProps) {
   getProfileData();
 
   return <div>YOU'RE LOGGED IN!</div>;

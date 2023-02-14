@@ -27,6 +27,29 @@ async function createProfile(username: string, name: string) {
   }
 }
 
+async function getProfile(username: string) {
+  try {
+    const res = await axios.request({
+      method: "get",
+      url: `${BASE_URL}/api/profile`,
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+
+    const profile = await res.data;
+
+    return profile;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      // return error.response?.data;
+      return new Error(JSON.stringify(error.response?.data));
+    }
+    return error as Error;
+  }
+}
+
 async function getProfileData() {
   await axios.request({
     method: "get",
@@ -38,4 +61,4 @@ async function getProfileData() {
   });
 }
 
-export { createProfile, getProfileData };
+export { createProfile, getProfile, getProfileData };
