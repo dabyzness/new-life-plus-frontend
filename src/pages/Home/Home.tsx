@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import { ProfileDisplay } from "../../components/ProfileDisplay/ProfileDisplay";
 import { Loading } from "../Loading/Loading";
 
 export interface HomeProps {
@@ -10,7 +11,11 @@ function Home(props: HomeProps) {
     return <Loading />;
   }
 
-  return <div>{props.profile && <div>{props.profile.username}</div>}</div>;
+  return (
+    <div>
+      <ProfileDisplay profile={props.profile} />
+    </div>
+  );
 }
 
 export { Home };
