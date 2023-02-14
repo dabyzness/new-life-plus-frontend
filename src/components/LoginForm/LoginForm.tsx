@@ -1,4 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { Navigate } from "react-router-dom";
+import { User } from "../../App";
 
 import styles from "./LoginForm.module.css";
 
@@ -9,6 +11,7 @@ export interface LoginFormData {
 
 export interface LoginFormProps {
   handleSubmitLogin: Function;
+  user: User | null;
 }
 
 function LoginForm(props: LoginFormProps) {
@@ -36,6 +39,7 @@ function LoginForm(props: LoginFormProps) {
 
   return (
     <div className={styles.formContainer}>
+      {props.user && <Navigate to="/home" />}
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <h2>Log in</h2>
         <input

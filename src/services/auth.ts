@@ -1,11 +1,20 @@
 import axios, { AxiosError } from "axios";
+import { User } from "../App";
 import { LoginFormData } from "../components/LoginForm/LoginForm";
 import { RegistrationFormData } from "../components/RegistrationForm/RegistrationForm";
 import { setAuthToken } from "../helpers/setAuthToken";
+import { setToken } from "./token";
 
 const BASE_URL = `${process.env.REACT_APP_BACKEND_SERVER_URL}`;
 
-async function register(user: RegistrationFormData<string>) {
+export interface AuthResponseJSON {
+  user: User;
+  token: string;
+}
+
+async function register(
+  user: RegistrationFormData<string>
+): Promise<AuthResponseJSON | Error> {
   try {
     const res = await axios.request({
       method: "post",
@@ -22,11 +31,11 @@ async function register(user: RegistrationFormData<string>) {
       // return error.response?.data;
       return new Error(JSON.stringify(error.response?.data));
     }
-    return error;
+    return error as Error;
   }
 }
 
-async function login(user: LoginFormData) {
+async function login(user: LoginFormData): Promise<AuthResponseJSON | Error> {
   try {
     const res = await axios.request({
       method: "post",
@@ -35,10 +44,10 @@ async function login(user: LoginFormData) {
       headers: { "Content-Type": "application/json" },
     });
 
-    const json = await res.data;
+    const json: AuthResponseJSON = await res.data;
 
     // Put token into local storage
-    localStorage.setItem("token", json.token);
+    setToken(json.token);
     // Add token to axios headers
     setAuthToken(json.token);
 
