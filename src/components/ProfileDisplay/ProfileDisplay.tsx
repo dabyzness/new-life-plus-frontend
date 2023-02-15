@@ -34,9 +34,6 @@ function ProfileDisplay(props: ProfileDisplayProps) {
         charisma={charisma}
         gold={gold}
       />
-      {/* Avatar broder Image */}
-      {/* Current Level */}
-      {/* Stats */}
     </div>
   );
 }

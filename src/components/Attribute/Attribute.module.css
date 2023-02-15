@@ -1,0 +1,82 @@
+@font-face {
+  font-family: Unitology;
+  src: url("../../../public/fonts/DeadSpace\ Unitology.ttf");
+}
+
+.glyph {
+  font-family: Unitology;
+  font-size: 36px;
+}
+
+.attribute {
+  width: 130px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.attributeName {
+  width: 0;
+  max-width: fit-content;
+  overflow-x: hidden;
+  transition: 0.25s ease-in-out;
+  /* font-weight: bold; */
+}
+
+.attribute:hover > .attributeName {
+  margin: 0 4px 0 8px;
+  width: 100%;
+}
+
+.value {
+  margin-right: auto;
+  margin-left: 4px;
+}
+
+/* Health Bar */
+
+.container {
+  position: relative;
+
+  width: 200px;
+  height: 48px;
+  /* background-color: whitesmoke; */
+  /* margin: 24px; */
+  margin-left: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.experienceBarBorder {
+  position: absolute;
+  height: 24px;
+  width: 90%;
+
+  /* background-color: aqua; */
+  border: 3px solid crimson;
+  border-radius: 50px;
+  text-align: center;
+}
+
+.experienceBarBorder > p {
+  margin: auto;
+  padding-top: 1.5px;
+  font-weight: bold;
+  transition: 0.1s ease-in-out;
+  opacity: 0;
+}
+
+.experienceBarBorder:hover > p {
+  opacity: 1;
+}
+
+.progress {
+  /* position: absolute; */
+  height: 24px;
+  margin-left: 3px;
+
+  background-color: rgba(255, 0, 0, 0.7);
+  /* border-bottom-left-radius: 50px; */
+  /* border-top-left-radius: 50px; */
+  border-radius: 50px 0 0 50px;
+}

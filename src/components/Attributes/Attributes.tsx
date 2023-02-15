@@ -14,7 +14,11 @@ function Attributes(props: AttributesProps) {
   return (
     <div className={styles.container}>
       {Object.keys(props).map((key) => (
-        <Attribute attribute={key} value={props[key as keyof typeof props]} />
+        <Attribute
+          attribute={key}
+          value={props[key as keyof typeof props]}
+          remainingValue={key === "health" ? 7 : undefined}
+        />
       ))}
     </div>
   );
