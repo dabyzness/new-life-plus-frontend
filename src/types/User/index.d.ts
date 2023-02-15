@@ -25,3 +25,13 @@ interface CreateProfileFormData {
   name: string;
   avatar?: string | null;
 }
+
+type SKILL = "HEALTH" | "STRENGTH" | "INTELLECT" | "CHARISMA";
+
+type FREQ = "DAILY" | "WEEKLY" | "MONTHLY";
+
+type DAILY_FREQ = "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN";
+
+type RANK = "D" | "C" | "B" | "A" | "S";
+
+type RARITY = "COMMON" | "UNCOMMON" | "RARE" | "EPIC" | "LEGENDARY";
