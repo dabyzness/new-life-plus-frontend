@@ -1,4 +1,5 @@
 import { ChangeEvent, useReducer } from "react";
+import { Checkbox } from "./Checkbox";
 
 function reducer(
   state: CreateTaskFormState,
@@ -6,12 +7,38 @@ function reducer(
 ): CreateTaskFormState {
   switch (action.type) {
     case "updateValue":
-      console.log(state);
       return {
         ...state,
         [action.field]: action.payload,
       };
+    case "addDay":
+      console.log("HELLO");
+      return {
+        ...state,
+        [action.field]: [
+          ...(state[action.field] as DAILY_FREQ[]),
+          action.payload,
+        ],
+      };
+    case "removeDay":
+      console.log("GOODBYE");
+      return {
+        ...state,
+        [action.field]: (state[action.field] as DAILY_FREQ[])?.filter(
+          (day) => day !== action.payload
+        ),
+      };
   }
+}
+
+export enum DAYS {
+  MON = "Monday",
+  TUE = "Tuesday",
+  WED = "Wednesday",
+  THU = "Thursday",
+  FRI = "Friday",
+  SAT = "Saturday",
+  SUN = "Sunday",
 }
 
 interface CreateTaskFormProps {}
@@ -25,7 +52,7 @@ export interface CreateTaskFormState {
   repeatable?: number;
 }
 
-type ActionType = "updateValue";
+type ActionType = "updateValue" | "addDay" | "removeDay";
 
 type Action = {
   type: ActionType;
@@ -46,24 +73,28 @@ function CreateTaskForm(props: CreateTaskFormProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function handleChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-    if (e.target instanceof HTMLInputElement) {
-      dispatch({
-        type: "updateValue",
-        field: e.target.name as keyof CreateTaskFormState,
-        payload: e.target.value,
-      });
+    if (e.target.type === "checkbox" && e.target instanceof HTMLInputElement) {
+      if (e.target.checked) {
+        dispatch({
+          type: "addDay",
+          field: e.target.name as keyof CreateTaskFormState,
+          payload: e.target.value,
+        });
+      } else {
+        dispatch({
+          type: "removeDay",
+          field: e.target.name as keyof CreateTaskFormState,
+          payload: e.target.value,
+        });
+      }
       return;
     }
 
-    console.log(e);
-
-    if (e.target instanceof HTMLSelectElement) {
-      dispatch({
-        type: "updateValue",
-        field: e.target.name as keyof CreateTaskFormState,
-        payload: e.target.name,
-      });
-    }
+    dispatch({
+      type: "updateValue",
+      field: e.target.name as keyof CreateTaskFormState,
+      payload: e.target.value,
+    });
   }
 
   return (
@@ -101,62 +132,26 @@ function CreateTaskForm(props: CreateTaskFormProps) {
 
         {state.frequency_type === "DAILY" && (
           <div>
-            <input
-              type="checkbox"
-              name="daily_freq"
-              id="MON"
-              value="MON"
-              checked={state.daily_freq?.includes("MON")}
-            />
-            <label htmlFor="MON">MON</label>
-            <input
-              type="checkbox"
-              name="daily_freq"
-              id="TUE"
-              value="TUE"
-              checked={state.daily_freq?.includes("TUE")}
-            />
-            <label htmlFor="TUE">TUE</label>
-            <input
-              type="checkbox"
-              name="daily_freq"
-              id="WED"
-              value="WED"
-              checked={state.daily_freq?.includes("WED")}
-            />
-            <label htmlFor="WED">WED</label>
-            <input
-              type="checkbox"
-              name="daily_freq"
-              id="THU"
-              value="THU"
-              checked={state.daily_freq?.includes("THU")}
-            />
-            <label htmlFor="THU">THU</label>
-            <input
-              type="checkbox"
-              name="daily_freq"
-              id="FRI"
-              value="FRI"
-              checked={state.daily_freq?.includes("FRI")}
-            />
-            <label htmlFor="FRI">FRI</label>
-            <input
-              type="checkbox"
-              name="daily_freq"
-              id="SAT"
-              value="SAT"
-              checked={state.daily_freq?.includes("SAT")}
-            />
-            <label htmlFor="SAT">SAT</label>
-            <input
-              type="checkbox"
-              name="daily_freq"
-              id="SUN"
-              value="SUN"
-              checked={state.daily_freq?.includes("SUN")}
-            />
-            <label htmlFor="SUN">SUN</label>
+            {(Object.keys(DAYS) as Array<keyof typeof DAYS>).map((key, i) => {
+              return (
+                <Checkbox
+                  key={key}
+                  name="daily_freq"
+                  value={key}
+                  label={Object.values(DAYS)[i]}
+                  handleChange={handleChange}
+                />
+              );
+            })}
+          </div>
+        )}
+
+        {state.frequency_type === "WEEKLY" && (
+          <div>
+            <input type="checkbox" name="weekly_freq" id="weekly" value={1} />
+            <label htmlFor="weekly">Every Week</label>
+            <input type="checkbox" name="weekly_freq" id="biweekly" value={2} />
+            <label htmlFor="biweekly">Biweekly</label>
           </div>
         )}
       </form>
