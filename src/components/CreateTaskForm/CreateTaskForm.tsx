@@ -99,8 +99,6 @@ function CreateTaskForm(props: CreateTaskFormProps) {
       field: e.target.name as keyof CreateTaskFormState,
       payload: e.target.value,
     });
-
-    console.log(state);
   }
 
   return (
@@ -136,41 +134,39 @@ function CreateTaskForm(props: CreateTaskFormProps) {
           <option value="MONTHLY">Monthly</option>
         </select>
 
-        {state.frequency_type === "DAILY" && (
-          <div>
-            {(Object.keys(DAYS) as Array<keyof typeof DAYS>).map((key, i) => {
-              return (
-                <Checkbox
-                  key={key}
-                  name="daily_freq"
-                  value={key}
-                  label={Object.values(DAYS)[i]}
-                  handleChange={handleChange}
-                />
-              );
-            })}
-          </div>
-        )}
+        <div>
+          {(Object.keys(DAYS) as Array<keyof typeof DAYS>).map((key, i) => {
+            return (
+              <Checkbox
+                key={key}
+                name="daily_freq"
+                value={key}
+                label={Object.values(DAYS)[i]}
+                handleChange={handleChange}
+                disabled={state.frequency_type !== "DAILY"}
+              />
+            );
+          })}
+        </div>
 
-        {state.frequency_type === "WEEKLY" && (
-          <div>
-            {[1, 2].map((amount) => (
-              <>
-                <input
-                  type="radio"
-                  name="weekly_freq"
-                  id={`radio${amount}`}
-                  value={amount}
-                  checked={state.weekly_freq === amount}
-                  onChange={handleChange}
-                />
-                <label htmlFor={`radio${amount}`}>
-                  {amount === 1 ? "Every Week" : "Bi-weekly"}
-                </label>
-              </>
-            ))}
-          </div>
-        )}
+        <div>
+          {[1, 2].map((amount) => (
+            <>
+              <input
+                type="radio"
+                name="weekly_freq"
+                id={`radio${amount}`}
+                value={amount}
+                checked={state.weekly_freq === amount}
+                onChange={handleChange}
+                disabled={state.frequency_type !== "WEEKLY"}
+              />
+              <label htmlFor={`radio${amount}`}>
+                {amount === 1 ? "Every Week" : "Bi-weekly"}
+              </label>
+            </>
+          ))}
+        </div>
       </form>
     </div>
   );

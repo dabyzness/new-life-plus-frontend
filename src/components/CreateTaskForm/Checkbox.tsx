@@ -6,11 +6,11 @@ interface CheckboxProps {
   value: keyof typeof DAYS | number;
   label: string;
   handleChange: Function;
-  check?: boolean;
+  disabled: boolean;
 }
 
 function Checkbox(props: CheckboxProps) {
-  const { name, value, label, check, handleChange } = props;
+  const { name, value, label, disabled, handleChange } = props;
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   return (
@@ -20,11 +20,12 @@ function Checkbox(props: CheckboxProps) {
         name={name}
         id={value as string}
         value={value}
-        checked={check ? check : isChecked}
+        checked={isChecked}
         onChange={(e) => {
           handleChange(e);
           setIsChecked(!isChecked);
         }}
+        disabled={disabled}
       />
       <label htmlFor={value as string}>{label}</label>
     </>
