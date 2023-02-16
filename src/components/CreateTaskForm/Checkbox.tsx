@@ -3,13 +3,14 @@ import { DAYS } from "./CreateTaskForm";
 
 interface CheckboxProps {
   name: string;
-  value: keyof typeof DAYS | 1 | 2;
+  value: keyof typeof DAYS | number;
   label: string;
   handleChange: Function;
+  check?: boolean;
 }
 
 function Checkbox(props: CheckboxProps) {
-  const { name, value, label, handleChange } = props;
+  const { name, value, label, check, handleChange } = props;
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   return (
@@ -19,7 +20,7 @@ function Checkbox(props: CheckboxProps) {
         name={name}
         id={value as string}
         value={value}
-        checked={isChecked}
+        checked={check ? check : isChecked}
         onChange={(e) => {
           handleChange(e);
           setIsChecked(!isChecked);

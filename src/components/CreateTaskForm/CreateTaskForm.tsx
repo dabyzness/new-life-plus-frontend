@@ -9,10 +9,12 @@ function reducer(
     case "updateValue":
       return {
         ...state,
-        [action.field]: action.payload,
+        [action.field]:
+          action.field === "weekly_freq"
+            ? Number(action.payload)
+            : action.payload,
       };
     case "addDay":
-      console.log("HELLO");
       return {
         ...state,
         [action.field]: [
@@ -21,7 +23,6 @@ function reducer(
         ],
       };
     case "removeDay":
-      console.log("GOODBYE");
       return {
         ...state,
         [action.field]: (state[action.field] as DAILY_FREQ[])?.filter(
@@ -73,7 +74,10 @@ function CreateTaskForm(props: CreateTaskFormProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function handleChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-    if (e.target.type === "checkbox" && e.target instanceof HTMLInputElement) {
+    if (
+      e.target instanceof HTMLInputElement &&
+      e.target.name === "daily_freq"
+    ) {
       if (e.target.checked) {
         dispatch({
           type: "addDay",
@@ -95,6 +99,8 @@ function CreateTaskForm(props: CreateTaskFormProps) {
       field: e.target.name as keyof CreateTaskFormState,
       payload: e.target.value,
     });
+
+    console.log(state);
   }
 
   return (
@@ -148,10 +154,21 @@ function CreateTaskForm(props: CreateTaskFormProps) {
 
         {state.frequency_type === "WEEKLY" && (
           <div>
-            <input type="checkbox" name="weekly_freq" id="weekly" value={1} />
-            <label htmlFor="weekly">Every Week</label>
-            <input type="checkbox" name="weekly_freq" id="biweekly" value={2} />
-            <label htmlFor="biweekly">Biweekly</label>
+            {[1, 2].map((amount) => (
+              <>
+                <input
+                  type="radio"
+                  name="weekly_freq"
+                  id={`radio${amount}`}
+                  value={amount}
+                  checked={state.weekly_freq === amount}
+                  onChange={handleChange}
+                />
+                <label htmlFor={`radio${amount}`}>
+                  {amount === 1 ? "Every Week" : "Bi-weekly"}
+                </label>
+              </>
+            ))}
           </div>
         )}
       </form>
