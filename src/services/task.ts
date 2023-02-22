@@ -10,7 +10,8 @@ import { getToken } from "./token";
 const BASE_URL = `${process.env.REACT_APP_BACKEND_SERVER_URL}`;
 
 async function createTask(
-  formData: CreateTaskFormState
+  formData: CreateTaskFormState,
+  profile_id: number
 ): Promise<DailyTask | WeeklyTask | MonthlyTask | Error> {
   try {
     if (formData.frequency_type === "DAILY") {
@@ -31,7 +32,7 @@ async function createTask(
         "Content-type": "application/json",
         Authorization: `Bearer ${getToken()}`,
       },
-      data: formData,
+      data: { ...formData, profile_id },
     });
 
     const task = await res.data;

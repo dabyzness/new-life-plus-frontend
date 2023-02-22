@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, redirect } from "react-router-dom";
 import "./App.css";
 import { CreateProfileForm } from "./components/CreateProfileForm/CreateProfileForm";
+import { CreateTaskFormState } from "./components/CreateTaskForm/CreateTaskForm";
 import { LoginForm, LoginFormData } from "./components/LoginForm/LoginForm";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import {
@@ -12,11 +13,13 @@ import { Home } from "./pages/Home/Home";
 
 import { login, register } from "./services/auth";
 import { createProfile, getProfile } from "./services/profile";
+import { createTask } from "./services/task";
 import { getUserFromToken } from "./services/token";
 
 function App() {
   const [user, setUser] = useState<User | null>(getUserFromToken());
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
     if (!user) {
@@ -74,6 +77,22 @@ function App() {
     return redirect("/home");
   }
 
+  async function handleSubmitCreateTask(formData: CreateTaskFormState) {
+    if (!user || !profile) {
+      return;
+    }
+
+    const task = await createTask(formData, profile.id);
+
+    if (task instanceof Error) {
+      return task;
+    }
+
+    setTasks([...tasks, task]);
+
+    return redirect("/home");
+  }
+
   return (
     <div className="App">
       <Routes>
@@ -109,7 +128,10 @@ function App() {
           path="/home"
           element={
             <ProtectedRoute user={user}>
-              <Home profile={profile} />
+              <Home
+                profile={profile}
+                handleSubmitCreateTask={handleSubmitCreateTask}
+              />
             </ProtectedRoute>
           }
         />

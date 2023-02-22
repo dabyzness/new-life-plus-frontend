@@ -6,6 +6,7 @@ import { Loading } from "../Loading/Loading";
 
 export interface HomeProps {
   profile: any;
+  handleSubmitCreateTask: Function;
 }
 
 function Home(props: HomeProps) {
@@ -16,7 +17,7 @@ function Home(props: HomeProps) {
   return (
     <div style={{ display: "flex" }}>
       <ProfileDisplay profile={props.profile} />
-      <CreateTaskForm />
+      <CreateTaskForm handleSubmitCreateTask={props.handleSubmitCreateTask} />
     </div>
   );
 }

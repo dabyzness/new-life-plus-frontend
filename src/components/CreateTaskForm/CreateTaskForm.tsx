@@ -1,4 +1,4 @@
-import { ChangeEvent, useReducer } from "react";
+import { ChangeEvent, FormEvent, useReducer } from "react";
 import { Checkbox } from "./Checkbox";
 import styles from "./CreateTaskForm.module.css";
 
@@ -43,7 +43,9 @@ export enum DAYS {
   SUN = "Sun",
 }
 
-interface CreateTaskFormProps {}
+interface CreateTaskFormProps {
+  handleSubmitCreateTask: Function;
+}
 
 export interface CreateTaskFormState {
   name: string;
@@ -103,9 +105,19 @@ function CreateTaskForm(props: CreateTaskFormProps) {
     });
   }
 
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const task = await props.handleSubmitCreateTask(state);
+
+    if (task instanceof Error) {
+      console.log(task);
+    }
+  }
+
   return (
     <div>
-      <form className={styles.newTaskForm}>
+      <form className={styles.newTaskForm} onSubmit={handleSubmit}>
         <h2>New Task</h2>
         <input
           className={styles.taskNameInput}
