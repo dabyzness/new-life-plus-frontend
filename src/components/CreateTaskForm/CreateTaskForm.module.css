@@ -1,0 +1,135 @@
+.checkboxContainer {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  column-gap: 20px;
+  margin-right: 0;
+}
+
+.taskNameInput {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.newTaskForm {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  background-color: whitesmoke;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.newTaskForm:nth-child(1) {
+  /* height: 800px; */
+}
+
+.weeklyFreqContainer {
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.weeklyFreqLabel {
+  width: 20%;
+  margin-right: auto;
+  text-align: center;
+}
+
+.radioContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+}
+
+.radioContainer > input {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  margin-top: -10px;
+  box-shadow: none;
+}
+
+.radioContainer > label {
+  transform: none;
+  color: black;
+}
+
+.radioContainer > label::after {
+  content: "";
+}
+
+.selectorContainer {
+  display: flex;
+  width: 100%;
+}
+
+.selector {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selector > select {
+  width: auto;
+}
+
+.selector > label {
+  width: auto;
+  max-width: 45%;
+  text-align: left;
+
+  /* color: blue; */
+  /* inline-size: 10px; */
+  height: auto;
+  transform: none;
+  /* white-space: break-spaces; */
+  /* overflow-wrap: break-word; */
+  word-wrap: break-word;
+}
+
+input + .radioLabel {
+  transform: none;
+  color: black;
+}
+
+input:focus + .radioLabel {
+  transform: none;
+  font-weight: normal;
+}
+
+.disabled {
+  color: rgb(150, 143, 143);
+}
+
+.disabled > .checkboxContainer > .radioContainer > .radioLabel {
+  color: rgb(150, 143, 143);
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.cancelButton {
+  transition: 0.25s ease-in-out;
+  height: 46px;
+  width: 40%;
+  margin: 0 auto;
+  font-size: 24px;
+  background-color: grey;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px rgba(70, 67, 67, 0.2),
+    -3px -3px 5px rgba(0, 0, 0, 0.2);
+}

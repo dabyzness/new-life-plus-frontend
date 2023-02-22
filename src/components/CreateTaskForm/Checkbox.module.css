@@ -1,0 +1,33 @@
+.checkboxContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  width: 100%;
+  align-items: center;
+}
+
+.checkboxInput {
+  margin: 0;
+  padding: 0;
+  height: auto;
+  width: auto;
+  box-shadow: none;
+}
+
+.checkboxLabel {
+  transform: none;
+  color: inherit;
+}
+
+.checkboxLabel::after {
+  content: "";
+}
+
+.checkboxInput:focus + .checkboxLabel {
+  transform: none;
+  font-weight: normal;
+}
+
+.checkboxInput:focus {
+  box-shadow: none;
+}

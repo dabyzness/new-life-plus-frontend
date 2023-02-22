@@ -14,7 +14,7 @@ function Home(props: HomeProps) {
   }
 
   return (
-    <div>
+    <div style={{ display: "flex" }}>
       <ProfileDisplay profile={props.profile} />
       <CreateTaskForm />
     </div>

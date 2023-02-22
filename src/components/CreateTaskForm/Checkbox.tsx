@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DAYS } from "./CreateTaskForm";
+import styles from "./Checkbox.module.css";
 
 interface CheckboxProps {
   name: string;
@@ -11,11 +12,12 @@ interface CheckboxProps {
 
 function Checkbox(props: CheckboxProps) {
   const { name, value, label, disabled, handleChange } = props;
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState<boolean>(true);
 
   return (
-    <>
+    <div className={styles.checkboxContainer}>
       <input
+        className={styles.checkboxInput}
         type="checkbox"
         name={name}
         id={value as string}
@@ -27,8 +29,10 @@ function Checkbox(props: CheckboxProps) {
         }}
         disabled={disabled}
       />
-      <label htmlFor={value as string}>{label}</label>
-    </>
+      <label className={styles.checkboxLabel} htmlFor={value as string}>
+        {label}
+      </label>
+    </div>
   );
 }
 

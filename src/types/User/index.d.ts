@@ -26,7 +26,9 @@ interface CreateProfileFormData {
   avatar?: string | null;
 }
 
-type SKILL = "HEALTH" | "STRENGTH" | "INTELLECT" | "CHARISMA";
+const skills = ["HEALTH", "STRENGTH", "INTELLECT", "CHARISMA"] as const;
+
+type SKILL = typeof skills[number];
 
 type FREQ = "DAILY" | "WEEKLY" | "MONTHLY";
 
