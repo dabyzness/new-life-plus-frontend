@@ -68,7 +68,6 @@ const initialState: CreateTaskFormState = {
   frequency_type: "DAILY",
   daily_freq: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
   weekly_freq: 1,
-  repeatable: 0,
 };
 
 function CreateTaskForm(props: CreateTaskFormProps) {
