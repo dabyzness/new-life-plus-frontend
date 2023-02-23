@@ -39,4 +39,30 @@ function isMonthlyTask(obj: object): obj is MonthlyTask {
   );
 }
 
-export { isDailyTask, isWeeklyTask, isMonthlyTask };
+function isTask(obj: object): obj is Task {
+  return (
+    "id" in obj &&
+    "name" in obj &&
+    "skill" in obj &&
+    "frequency_type" in obj &&
+    "streak" in obj &&
+    "num_completed" in obj
+    // && Object.keys(obj).length ===
+  );
+}
+
+function isTaskArray(obj: object[]): obj is Task[] {
+  if (obj.length === 0) {
+    return true;
+  }
+
+  for (let item in obj) {
+    if (!isTask(obj[item])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+export { isDailyTask, isWeeklyTask, isMonthlyTask, isTask, isTaskArray };

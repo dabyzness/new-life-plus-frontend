@@ -3,6 +3,7 @@ import { CreateTaskFormState } from "../components/CreateTaskForm/CreateTaskForm
 import {
   isDailyTask,
   isMonthlyTask,
+  isTaskArray,
   isWeeklyTask,
 } from "../validation/taskValidation";
 import { getToken } from "./token";
@@ -72,7 +73,11 @@ async function getAllTasks(username: string): Promise<Task[] | Error> {
 
     // Update once we know what we're sending over with Express
     // Don't want to assert type here
-    const tasks = (await res.data) as Task[];
+    const tasks = await res.data;
+
+    if (!isTaskArray(tasks)) {
+      throw new Error("Invalid array.");
+    }
 
     return tasks;
   } catch (error) {
