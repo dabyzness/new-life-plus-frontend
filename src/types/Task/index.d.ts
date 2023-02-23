@@ -20,3 +20,5 @@ interface WeeklyTask extends Task {
 interface MonthlyTask extends Task {
   frequency_type: "MONTHLY";
 }
+
+type AllTaskArray = [DailyTask | WeeklyTask | MonthlyTask];

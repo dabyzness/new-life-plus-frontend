@@ -51,13 +51,17 @@ function isTask(obj: object): obj is Task {
   );
 }
 
-function isTaskArray(obj: object[]): obj is Task[] {
+function isTaskArray(obj: object[]): obj is AllTaskArray {
   if (obj.length === 0) {
     return true;
   }
 
   for (let item in obj) {
-    if (!isTask(obj[item])) {
+    if (
+      !isDailyTask(obj[item]) ||
+      !isWeeklyTask(obj[item]) ||
+      !isMonthlyTask(obj[item])
+    ) {
       return false;
     }
   }
