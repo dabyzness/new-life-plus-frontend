@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { CreateTaskForm } from "../../components/CreateTaskForm/CreateTaskForm";
 import { ExperienceBar } from "../../components/ExperienceBar/ExperienceBar";
 import { ProfileDisplay } from "../../components/ProfileDisplay/ProfileDisplay";
@@ -10,6 +10,8 @@ export interface HomeProps {
 }
 
 function Home(props: HomeProps) {
+  const navigate = useNavigate();
+
   if (!props.profile) {
     return <Loading />;
   }
@@ -17,7 +19,13 @@ function Home(props: HomeProps) {
   return (
     <div style={{ display: "flex" }}>
       <ProfileDisplay profile={props.profile} />
-      <CreateTaskForm handleSubmitCreateTask={props.handleSubmitCreateTask} />
+      <button
+        onClick={() => {
+          navigate("/createTask");
+        }}
+      >
+        Create New Task
+      </button>
     </div>
   );
 }

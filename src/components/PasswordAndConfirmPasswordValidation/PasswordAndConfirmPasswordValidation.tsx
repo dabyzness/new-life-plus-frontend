@@ -9,6 +9,7 @@ export interface PasswordsInput {
 }
 
 export interface PasswordError<T extends string | boolean> {
+  [key: string]: T;
   hasMinLength: T;
   hasUppercase: T;
   hasLowercase: T;

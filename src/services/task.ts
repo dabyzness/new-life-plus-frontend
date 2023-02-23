@@ -59,4 +59,29 @@ async function createTask(
   }
 }
 
-export { createTask };
+async function getAllTasks(username: string): Promise<Task[] | Error> {
+  try {
+    const res = await axios.request({
+      method: "get",
+      url: `${BASE_URL}/api/profile/${username}/tasks`,
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+
+    // Update once we know what we're sending over with Express
+    // Don't want to assert type here
+    const tasks = (await res.data) as Task[];
+
+    return tasks;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return new Error(JSON.stringify(error.response?.data));
+    }
+
+    return error as Error;
+  }
+}
+
+export { createTask, getAllTasks };

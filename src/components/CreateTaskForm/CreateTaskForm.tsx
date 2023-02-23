@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useReducer } from "react";
+import { redirect, useNavigate } from "react-router-dom";
 import { Checkbox } from "./Checkbox";
 import styles from "./CreateTaskForm.module.css";
 
@@ -74,6 +75,7 @@ const initialState: CreateTaskFormState = {
 
 function CreateTaskForm(props: CreateTaskFormProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const navigate = useNavigate();
 
   function handleChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     console.log(state);
@@ -112,7 +114,10 @@ function CreateTaskForm(props: CreateTaskFormProps) {
 
     if (task instanceof Error) {
       console.log(task);
+      return;
     }
+
+    navigate("/home");
   }
 
   return (
