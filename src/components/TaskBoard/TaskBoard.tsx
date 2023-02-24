@@ -47,18 +47,14 @@ function TaskBoard(props: TaskBoardProps) {
         ))}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ul>
-          {weeklyTasks.map((task) => (
-            <li key={task.name}>{task.name}</li>
-          ))}
-        </ul>
+        {weeklyTasks.map((task) => (
+          <Task key={task.name} task={task} />
+        ))}
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <ul>
-          {monthlyTasks.map((task) => (
-            <li key={task.name}>{task.name}</li>
-          ))}
-        </ul>
+        {monthlyTasks.map((task) => (
+          <Task key={task.name} task={task} />
+        ))}
       </TabPanel>
     </Box>
   );
