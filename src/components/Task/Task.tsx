@@ -56,6 +56,7 @@ function Task(props: TaskProps) {
         flexWrap: "wrap",
         maxWidth: "400px",
         marginBottom: "8px",
+        zIndex: 99999,
       }}
       id={`draggable-card-${draggableName}`}
       aria-labelledby={`draggable-card-${draggableName}`}

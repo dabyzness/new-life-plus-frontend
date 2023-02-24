@@ -6,6 +6,7 @@ import {
   isWeeklyTask,
 } from "../../validation/taskValidation";
 import Draggable from "react-draggable";
+import { useRef } from "react";
 
 interface TasksOverviewProps {
   tasks: Task[];
@@ -13,6 +14,8 @@ interface TasksOverviewProps {
 
 function TasksOverview(props: TasksOverviewProps) {
   const { tasks } = props;
+  const nodeRef = useRef(null);
+  const pp = useRef(null);
 
   const dailyTasks = tasks.filter((task) => isDailyTask(task)) as DailyTask[];
   const weeklyTasks = tasks.filter((task) =>
@@ -25,15 +28,15 @@ function TasksOverview(props: TasksOverviewProps) {
   return (
     <Card sx={{ width: "1000px" }}>
       <CardHeader sx={{ textAlign: "center" }} title="Tasks" />
-      <CardContent>
+      <CardContent id="task-overview-container" ref={pp}>
         <Grid container spacing={2}>
           <Grid item xs={4}>
-            <Card>
-              <CardHeader sx={{ textAlign: "center" }} title=" Daily" />
+            <Card sx={{ overflow: "visible" }}>
+              <CardHeader sx={{ textAlign: "center" }} title="Daily" />
               <CardContent>
                 {dailyTasks.map((task) => (
-                  <Draggable>
-                    <div>
+                  <Draggable nodeRef={nodeRef}>
+                    <div ref={nodeRef}>
                       <Task
                         task={task}
                         overview={true}
@@ -46,13 +49,13 @@ function TasksOverview(props: TasksOverviewProps) {
             </Card>
           </Grid>
           <Grid item xs={4}>
-            <Card>
+            <Card sx={{ overflow: "visible" }}>
               <CardHeader sx={{ textAlign: "center" }} title="Weekly" />
               <CardContent></CardContent>
             </Card>
           </Grid>
           <Grid item xs={4}>
-            <Card>
+            <Card sx={{ overflow: "visible" }}>
               <CardHeader sx={{ textAlign: "center" }} title="Monthly" />
               <CardContent></CardContent>
             </Card>
