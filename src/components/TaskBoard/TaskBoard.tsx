@@ -7,6 +7,9 @@ import {
   isWeeklyTask,
 } from "../../validation/taskValidation";
 import { TabPanel } from "../TabPanel/TabPanel";
+import { Task } from "../Task/Task";
+
+// TODO: Sort Tasks by completion. If complete, move to bottom;
 
 interface TaskBoardProps {
   tasks: Task[];
@@ -25,24 +28,6 @@ function TaskBoard(props: TaskBoardProps) {
     setValue(newValue);
   }
 
-  // return (
-  //   <div>
-  //     <div>
-  //       <h2>Daily Tasks</h2>
-  //       <ul>
-  //         {dailyTasks.map((task) => (
-  //           <li>{task.name}</li>
-  //         ))}
-  //       </ul>
-  //     </div>
-  //     <div>
-  //       <h2>Weekly Tasks</h2>
-  //     </div>
-  //     <div>
-  //       <h2>Monthly Tasks</h2>
-  //     </div>
-  //   </div>
-  // );
   return (
     <Box>
       <Box>
@@ -53,11 +38,9 @@ function TaskBoard(props: TaskBoardProps) {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <ul>
-          {dailyTasks.map((task) => (
-            <li key={task.name}>{task.name}</li>
-          ))}
-        </ul>
+        {dailyTasks.map((task) => (
+          <Task key={task.name} task={task} />
+        ))}
       </TabPanel>
       <TabPanel value={value} index={1}>
         <ul>
