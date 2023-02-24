@@ -155,6 +155,7 @@ function App() {
               <Home
                 profile={profile}
                 handleSubmitCreateTask={handleSubmitCreateTask}
+                tasks={tasks}
               />
             </ProtectedRoute>
           }

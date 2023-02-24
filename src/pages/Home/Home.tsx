@@ -2,11 +2,13 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { CreateTaskForm } from "../../components/CreateTaskForm/CreateTaskForm";
 import { ExperienceBar } from "../../components/ExperienceBar/ExperienceBar";
 import { ProfileDisplay } from "../../components/ProfileDisplay/ProfileDisplay";
+import { TaskBoard } from "../../components/TaskBoard/TaskBoard";
 import { Loading } from "../Loading/Loading";
 
 export interface HomeProps {
   profile: any;
   handleSubmitCreateTask: Function;
+  tasks: Task[];
 }
 
 function Home(props: HomeProps) {
@@ -26,6 +28,7 @@ function Home(props: HomeProps) {
       >
         Create New Task
       </button>
+      <TaskBoard tasks={props.tasks} />
     </div>
   );
 }

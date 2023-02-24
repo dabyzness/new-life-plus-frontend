@@ -60,7 +60,7 @@ async function createTask(
   }
 }
 
-async function getAllTasks(username: string): Promise<AllTaskArray | Error> {
+async function getAllTasks(username: string): Promise<Task[] | Error> {
   try {
     const res = await axios.request({
       method: "get",
