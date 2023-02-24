@@ -7,15 +7,20 @@ import {
   IconButtonProps,
   Typography,
   Collapse,
+  Tooltip,
 } from "@mui/material";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CircleIcon from "@mui/icons-material/Circle";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
+import { isDailyTask } from "../../validation/taskValidation";
 
 // TODO: Clicking on the checkbox needs to actually complete the task in the database -- Write API
 // TODO: Make Card look disabled if task is complete!
+
+const dayArr: DAILY_FREQ[] = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -35,12 +40,13 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 interface TaskProps {
   task: DailyTask | WeeklyTask | MonthlyTask;
+  overview?: boolean;
 }
 
 function Task(props: TaskProps) {
   const [isComplete, setIsComplete] = useState<boolean>(false);
   const [expanded, setExpanded] = useState<boolean>(false);
-  const { task } = props;
+  const { task, overview } = props;
 
   return (
     <Card sx={{ display: "flex", flexWrap: "wrap", maxWidth: "400px" }}>
@@ -60,13 +66,15 @@ function Task(props: TaskProps) {
           <ExpandMoreIcon />
         </ExpandMore>
 
-        <Button
-          onClick={() => {
-            setIsComplete(!isComplete);
-          }}
-        >
-          {isComplete ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
-        </Button>
+        {!overview && (
+          <Button
+            onClick={() => {
+              setIsComplete(!isComplete);
+            }}
+          >
+            {isComplete ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
+          </Button>
+        )}
       </CardActions>
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -79,6 +87,28 @@ function Task(props: TaskProps) {
           <Typography>Streak: {task.streak}</Typography>
         </CardContent>
       </Collapse>
+
+      {overview && (
+        <CardContent sx={{ width: "100%", paddingTop: 0, paddingBottom: 0 }}>
+          {isDailyTask(task) &&
+            dayArr.map((day) => {
+              return (
+                <Tooltip title={day}>
+                  <IconButton sx={{ margin: 0, padding: 0, minWidth: 0 }}>
+                    <CircleIcon
+                      key={day}
+                      sx={{
+                        color: task.daily_freq.includes(day) ? "green" : "red",
+                      }}
+                      fontSize="small"
+                      aria-label={day}
+                    />
+                  </IconButton>
+                </Tooltip>
+              );
+            })}
+        </CardContent>
+      )}
     </Card>
   );
 }
