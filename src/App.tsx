@@ -166,7 +166,7 @@ function App() {
           path="/overview/tasks"
           element={
             <ProtectedRoute user={user}>
-              <TasksOverview />
+              <TasksOverview tasks={tasks} />
             </ProtectedRoute>
           }
         />
