@@ -41,15 +41,25 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 interface TaskProps {
   task: DailyTask | WeeklyTask | MonthlyTask;
   overview?: boolean;
+  draggableName?: string;
 }
 
 function Task(props: TaskProps) {
   const [isComplete, setIsComplete] = useState<boolean>(false);
   const [expanded, setExpanded] = useState<boolean>(false);
-  const { task, overview } = props;
+  const { task, overview, draggableName } = props;
 
   return (
-    <Card sx={{ display: "flex", flexWrap: "wrap", maxWidth: "400px" }}>
+    <Card
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        maxWidth: "400px",
+        marginBottom: "8px",
+      }}
+      id={`draggable-card-${draggableName}`}
+      aria-labelledby={`draggable-card-${draggableName}`}
+    >
       <CardContent>
         <Typography>{task.name}</Typography>
       </CardContent>
@@ -89,12 +99,26 @@ function Task(props: TaskProps) {
       </Collapse>
 
       {overview && (
-        <CardContent sx={{ width: "100%", paddingTop: 0, paddingBottom: 0 }}>
+        <CardContent
+          sx={{
+            width: "100%",
+            paddingBottom: 0,
+            paddingTop: 0,
+            "&:last-child": { paddingBottom: "8px" },
+          }}
+        >
           {isDailyTask(task) &&
             dayArr.map((day) => {
               return (
                 <Tooltip title={day}>
-                  <IconButton sx={{ margin: 0, padding: 0, minWidth: 0 }}>
+                  <IconButton
+                    sx={{
+                      margin: 0,
+                      padding: 0,
+                      minWidth: 0,
+                      transform: "scale(75%)",
+                    }}
+                  >
                     <CircleIcon
                       key={day}
                       sx={{

@@ -5,6 +5,7 @@ import {
   isMonthlyTask,
   isWeeklyTask,
 } from "../../validation/taskValidation";
+import Draggable from "react-draggable";
 
 interface TasksOverviewProps {
   tasks: Task[];
@@ -31,7 +32,15 @@ function TasksOverview(props: TasksOverviewProps) {
               <CardHeader sx={{ textAlign: "center" }} title=" Daily" />
               <CardContent>
                 {dailyTasks.map((task) => (
-                  <Task task={task} overview={true} />
+                  <Draggable>
+                    <div>
+                      <Task
+                        task={task}
+                        overview={true}
+                        draggableName={task.name.replaceAll(" ", "-")}
+                      />
+                    </div>
+                  </Draggable>
                 ))}
               </CardContent>
             </Card>
