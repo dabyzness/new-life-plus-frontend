@@ -13,6 +13,7 @@ import {
   RegistrationFormData,
 } from "./components/RegistrationForm/RegistrationForm";
 import { Home } from "./pages/Home/Home";
+import { TasksOverview } from "./pages/TasksOverview/TasksOverview";
 
 import { login, register } from "./services/auth";
 import { createProfile, getProfile } from "./services/profile";
@@ -157,6 +158,15 @@ function App() {
                 handleSubmitCreateTask={handleSubmitCreateTask}
                 tasks={tasks}
               />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/overview/tasks"
+          element={
+            <ProtectedRoute user={user}>
+              <TasksOverview />
             </ProtectedRoute>
           }
         />
