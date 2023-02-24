@@ -21,8 +21,12 @@ function TaskBoard(props: TaskBoardProps) {
   const [value, setValue] = useState<number>(0);
 
   const dailyTasks = tasks.filter((task) => isDailyTask(task)) as DailyTask[];
-  const weeklyTasks = tasks.filter((task) => isWeeklyTask(task));
-  const monthlyTasks = tasks.filter((task) => isMonthlyTask(task));
+  const weeklyTasks = tasks.filter((task) =>
+    isWeeklyTask(task)
+  ) as WeeklyTask[];
+  const monthlyTasks = tasks.filter((task) =>
+    isMonthlyTask(task)
+  ) as MonthlyTask[];
 
   function handleChange(e: SyntheticEvent, newValue: number) {
     setValue(newValue);
